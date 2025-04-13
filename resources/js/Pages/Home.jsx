@@ -10,12 +10,21 @@ import Lagoi from './assets/lagoi.png';
 import Pantai from './assets/pantai.png';
 import Tugu from './assets/tugu siri.png';
 import Wave from './assets/Vector 1.png';
+import BPJS from './layanan/BPJS.png';
 import Bus from './layanan/Bus.png';
+import DompetDigital from './layanan/DompetDigital.png';
 import Hotel from './layanan/Hotel.png';
 import Kapal from './layanan/Kapal laut.png';
 import Kereta from './layanan/Kereta api.png';
+import PLN from './layanan/ListrikPLN.png';
+import PBB from './layanan/PBB.png';
+import PDAM from './layanan/PDAM.png';
 import Pesawat from './layanan/Pesawat.png';
+import Pulsa from './layanan/Pulsa.png';
+import ShuttleBus from './layanan/ShuttleBus.png';
 import Ticket from './layanan/Ticket.png';
+import TVKabel from './layanan/TV.png';
+import VoucherGames from './layanan/Voucher.png';
 import BatikAir from './partner/batik air.png';
 import Citilink from './partner/citilink.png';
 import GarudaIndo from './partner/garuda indonesia.png';
@@ -28,6 +37,14 @@ import Sriwijaya from './partner/Sriwijaya Air.png';
 import SuperAir from './partner/Super Air Jet.png';
 import Trigana from './partner/Trigana Air.png';
 import Wings from './partner/wingsair.png';
+import Promo1 from './promo/Promo1.jpeg';
+import Promo2 from './promo/Promo2.jpeg';
+import Promo3 from './promo/Promo3.jpeg';
+import Promo4 from './promo/Promo4.jpeg';
+import Promo5 from './promo/Promo5.jpeg';
+import Promo6 from './promo/Promo6.jpeg';
+import Promo7 from './promo/Promo7.jpeg';
+import Promo8 from './promo/Promo8.jpeg';
 import Bagan from './world/Bagan.jpg';
 import Borobudur from './world/borobudur.jpg';
 import Celcus from './world/Celcus.jpg';
@@ -93,6 +110,53 @@ const services = [
 
 const wisataImages = [Borobudur, Tembok, Masjid, Tajmahal, Piramida];
 
+const promoItems = [
+    {
+        title: 'Promo Harga Papan',
+        image: Promo1,
+    },
+    {
+        title: 'Sewa Mesin Fotocopy',
+        image: Promo2,
+    },
+    {
+        title: 'Jasa Cetak Spanduk',
+        image: Promo3,
+    },
+    {
+        title: 'Media Promosi',
+        image: Promo4,
+    },
+    {
+        title: 'Jasa Rental Kendaraan',
+        image: Promo5,
+    },
+    {
+        title: 'Beli Tiket Pesawat, Kapal, Kereta',
+        image: Promo6,
+    },
+    {
+        title: 'Diskon & Murah',
+        image: Promo7,
+    },
+    {
+        title: 'Jasa Percetakan',
+        image: Promo8,
+    },
+];
+
+const layananItems = [
+    { image: ShuttleBus, label: 'Shuttle Bus' },
+    { image: Pulsa, label: 'Pulsa' },
+    { image: PLN, label: 'Listrik PLN' },
+    { image: DompetDigital, label: 'Dompet Digital' },
+    { image: VoucherGames, label: 'Voucher Games' },
+    { image: BPJS, label: 'BPJS' },
+    { image: PDAM, label: 'PDAM' },
+    { image: TVKabel, label: 'TV Kabel' },
+    { image: PBB, label: 'PBB' },
+];
+
 const Home = () => {
     return (
         <>
@@ -134,7 +198,7 @@ const Home = () => {
             <section className="min-h-screen bg-[#CCE0FD] px-4 py-20 font-['DM_Sans']">
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
-                    <p className="mt-2 text-[#EF2DA2]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
+                    <p className="mt-2 font-bold text-[#EF2DA2]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -159,7 +223,7 @@ const Home = () => {
             <section style={{ height: '500px', position: 'relative' }}>
                 <InfiniteScroll items={items} isTilted={true} tiltDirection="left" autoplay={true} autoplaySpeed={2.0} autoplayDirection="down" />
             </section>
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-16">
+            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-25">
                 <div className="mb-8 text-center">
                     <h2 className="text-3xl font-bold text-[#1B1B1F]">Rekomendasi Tempat Wisata</h2>
                     <p className="mt-2 font-bold text-[#EF2DA2]">Butuh ide liburan? Cek tempat wisata terbaik yang kami pilih khusus untukmu!</p>
@@ -199,11 +263,76 @@ const Home = () => {
                             </SwiperSlide>
                         ))}
                         <div className="mt-8 flex items-center justify-center gap-8">
-                            <div className="swiper-button-prev !static !h-8 !w-8 !text-blue-600 after:!text-lg"></div>
+                            <div className="swiper-button-prev !static !h-8 !w-8 !text-gray-800 after:!text-lg"></div>
                             <div className="swiper-pagination !static"></div>
-                            <div className="swiper-button-next !static !h-8 !w-8 !text-blue-600 after:!text-lg"></div>
+                            <div className="swiper-button-next !static !h-8 !w-8 !text-gray-800 after:!text-lg"></div>
                         </div>
                     </Swiper>
+                </div>
+            </section>
+            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-5">
+                <div className="mb-10 text-center">
+                    <h2 className="text-3xl font-bold text-[#1B1B1F]">Promo Menarik</h2>
+                    <p className="mt-2 font-bold text-[#EF2DA2]">
+                        Nikmati berbagai promo dan layanan spesial dari kami <br />
+                        dengan harga yang lebih hemat.
+                    </p>
+                </div>
+
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                    {promoItems.map((item, index) => (
+                        <div key={index} className="overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:scale-105">
+                            <img src={item.image} alt={item.title} className="h-60 w-full object-fill" />
+                            <div className="p-4">
+                                <h3 className="font-['DM Sans'] text-center text-sm leading-tight font-bold text-black">{item.title}</h3>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+            <section
+                className="font-['DM Sans'] px-4 py-16"
+                style={{
+                    background: 'linear-gradient(to bottom, #CCE0FD, #FFFFFF)',
+                }}
+            >
+                <div className="mb-10 text-center">
+                    <h2 className="text-2xl font-bold text-[#1B1B1F]">Butuh Layanan Lainnya?</h2>
+                    <p className="mt-2 font-bold text-[#EF2DA2]">Klik ikon di bawah untuk pesan langsung lewat WhatsApp!</p>
+                </div>
+
+                <div className="mx-auto grid max-w-5xl grid-cols-5 justify-items-center gap-4">
+                    {layananItems.slice(0, 5).map((item, index) => (
+                        <a
+                            key={index}
+                            href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center"
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.label}
+                                className="h-40 w-40 object-contain transition-transform duration-200 hover:scale-110"
+                            />
+                        </a>
+                    ))}
+                    <div className="col-span-5 mt-4 flex justify-center gap-12">
+                        {layananItems.slice(5).map((item, index) => (
+                            <a
+                                key={index}
+                                href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                    src={item.image}
+                                    alt={item.label}
+                                    className="h-40 w-40 object-contain transition-transform duration-200 hover:scale-110"
+                                />
+                            </a>
+                        ))}
+                    </div>
                 </div>
             </section>
         </>
