@@ -14,9 +14,9 @@ class Hero extends Model
 
     protected $fillable = [
         'name',
-        'icon',
         'link',
         'gambar',
+        'description',
     ];
 
     protected $dates = ['deleted_at'];
