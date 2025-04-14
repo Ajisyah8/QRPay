@@ -28,7 +28,7 @@ createInertiaApp({
         }
 
         createRoot(el).render(
-            <div className="flex min-h-screen flex-col">
+            <div className="flex min-h-screen flex-col pt-[80px]">
                 <Navbar />
                 <main className="flex-grow">{PageComponent}</main>
                 <Footer />

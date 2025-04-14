@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -45,6 +46,11 @@ import Promo5 from './promo/Promo5.jpeg';
 import Promo6 from './promo/Promo6.jpeg';
 import Promo7 from './promo/Promo7.jpeg';
 import Promo8 from './promo/Promo8.jpeg';
+import Bali from './wisata/bali.jpg';
+import Candi from './wisata/candi.jpg';
+import Komodo from './wisata/komodo.jpg';
+import RajaAmpat from './wisata/rajaAmpat.jpg';
+import Wakatobi from './wisata/wakatobi.jpg';
 import Bagan from './world/Bagan.jpg';
 import Borobudur from './world/borobudur.jpg';
 import Celcus from './world/Celcus.jpg';
@@ -108,7 +114,7 @@ const services = [
     },
 ];
 
-const wisataImages = [Borobudur, Tembok, Masjid, Tajmahal, Piramida];
+const wisataImages = [Bali, Candi, Komodo, RajaAmpat, Wakatobi];
 
 const promoItems = [
     {
@@ -160,34 +166,94 @@ const layananItems = [
 const Home = () => {
     return (
         <>
-            <section className="bg-gradient-to-b from-[#8FD8FA] to-[#CCE0FD] py-16 font-['DM_Sans']">
+            <motion.section
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="bg-gradient-to-b from-[#8FD8FA] to-[#CCE0FD] py-16 font-['DM_Sans']"
+            >
                 <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 md:grid-cols-2">
-                    <div>
-                        <img src={Wave} alt="wave" className="mb-4 w-20" />
-                        <h1 className="mb-6 text-3xl leading-tight font-bold text-black md:text-4xl">
+                    <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
+                        <motion.img
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            src={Wave}
+                            alt="wave"
+                            className="mb-4 w-20"
+                        />
+                        <motion.h1
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.5, delay: 0.4 }}
+                            className="mb-6 text-3xl leading-tight font-bold text-black md:text-4xl"
+                        >
                             Sistem Digital untuk Pejalanan
                             <br />
                             Tanpa Hambatan
-                        </h1>
-                        <p className="text-md mb-6 text-gray-700">
+                        </motion.h1>
+                        <motion.p
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                            className="text-md mb-6 text-gray-700"
+                        >
                             <span className="font-medium text-[#EF018F]">QR Pay</span> bantu kamu pesan tiket perjalanan dengan praktis.
                             <br />
                             Aman, cepat, dan langsung terkonfirmasi.
-                        </p>
-                        <button className="rounded-full bg-blue-600 px-6 py-3 text-white shadow-md transition duration-200 hover:bg-blue-700">
+                        </motion.p>
+                        <motion.button
+                            initial={{ y: 20, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ duration: 0.5, delay: 0.6 }}
+                            onClick={() => document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' })}
+                            className="cursor-pointer rounded-full bg-blue-600 px-6 py-3 text-white shadow-md transition duration-200 hover:bg-blue-700"
+                        >
                             Pesan Tiket Sekarang
-                        </button>
-                    </div>
+                        </motion.button>
+                    </motion.div>
 
-                    <div className="relative flex h-[500px] w-full items-center justify-center">
-                        <img src={Tugu} alt="Monas" className="ml-50 h-[420px]" />
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.4 }}
+                        className="relative flex h-[500px] w-full items-center justify-center"
+                    >
+                        <motion.img
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
+                            src={Tugu}
+                            alt="Monas"
+                            className="ml-50 h-[420px]"
+                        />
 
-                        <img src={Jembatan} className="absolute top-0 right-[250px] h-[150px] w-[150px] rounded-full" />
-                        <img src={Pantai} className="absolute bottom-[230px] left-[180px] h-[80px] w-[80px] rounded-full" />
-                        <img src={Lagoi} className="absolute top-[80px] right-[-40px] h-[90px] w-[90px] rounded-full" />
-                    </div>
+                        <motion.img
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.6 }}
+                            src={Jembatan}
+                            className="absolute top-0 right-[250px] h-[150px] w-[150px] rounded-full"
+                        />
+                        <motion.img
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.7 }}
+                            src={Pantai}
+                            className="absolute bottom-[230px] left-[180px] h-[80px] w-[80px] rounded-full"
+                        />
+                        <motion.img
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ duration: 0.5, delay: 0.8 }}
+                            src={Lagoi}
+                            className="absolute top-[80px] right-[-40px] h-[90px] w-[90px] rounded-full"
+                        />
+                    </motion.div>
                 </div>
-            </section>
+            </motion.section>
             <section className="overflow-hidden bg-[#CCE0FD] py-8">
                 <div className="animate-marquee flex w-max items-center whitespace-nowrap">
                     {[...logos, ...logos].map((logo, index) => (
@@ -195,7 +261,7 @@ const Home = () => {
                     ))}
                 </div>
             </section>
-            <section className="min-h-screen bg-[#CCE0FD] px-4 py-20 font-['DM_Sans']">
+            <section className="min-h-screen bg-[#CCE0FD] px-4 py-20 font-['DM_Sans']" id="services-section">
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
                     <p className="mt-2 font-bold text-[#EF2DA2]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
@@ -212,9 +278,11 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="mt-auto pt-6">
-                                <button className="w-full cursor-pointer rounded-full bg-[#EF2DA2B2] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#EF2DA2]">
-                                    Pesan Sekarang
-                                </button>
+                                <a href="https://velotiket.com/velosiqrpay" target="_blank">
+                                    <button className="w-full cursor-pointer rounded-full bg-[#EF2DA2B2] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#EF2DA2]">
+                                        Pesan Sekarang
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     ))}

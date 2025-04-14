@@ -1,5 +1,6 @@
-import { FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
+import { FaEnvelope, FaFacebookF, FaInstagram, FaMapMarkerAlt, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 import Nature from './assets/Footer.png';
+import Playstore from './assets/playstore.png';
 import Logo from './assets/qrpay.png';
 
 const Footer = () => {
@@ -11,29 +12,30 @@ const Footer = () => {
                         <img src={Logo} alt="QRPay Logo" className="mb-4 h-10" />
                         <div className="flex flex-col gap-3">
                             <div className="flex items-start gap-2">
-                                <span className="text-sm text-gray-700">📍</span>
+                                <FaMapMarkerAlt className="mt-1 text-gray-700" />
                                 <p className="text-sm leading-relaxed text-gray-700">
                                     Jl. Bukit Barisan No. 12A, Kota Tanjungpinang –<br />
                                     Provinsi Kepulauan Riau, 29124
                                 </p>
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-sm text-gray-700">✉️</span>
+                                <FaEnvelope className="text-gray-700" />
                                 <p className="text-sm text-gray-700">qrpayonlines@gmail.com</p>
                             </div>
                             <div className="mt-10">
                                 <h4 className="mb-3 font-semibold text-gray-900">Follow us</h4>
                                 <div className="flex space-x-4 text-xl text-gray-600">
-                                    <a href="#" className="hover:text-[#1877F2]">
+                                    <a
+                                        href="https://www.facebook.com/people/Qrpaycoid/pfbid02bgksaSKXgb5Nrv9th2v4tyAazdKpVszwBiw2NbHh3eDamonyX78T4ziGj3k7FM1Kl/"
+                                        className="hover:text-[#1877F2]"
+                                        target="_blank"
+                                    >
                                         <FaFacebookF />
                                     </a>
-                                    <a href="#" className="hover:text-[#1DA1F2]">
-                                        <FaTwitter />
-                                    </a>
-                                    <a href="#" className="hover:text-[#FF0000]">
+                                    <a href="http://www.youtube.com/@qrpayonline" className="hover:text-[#FF0000]" target="_blank">
                                         <FaYoutube />
                                     </a>
-                                    <a href="#" className="hover:text-[#E4405F]">
+                                    <a href="https://www.instagram.com/qrpay.co.id" className="hover:text-[#E4405F]" target="_blank">
                                         <FaInstagram />
                                     </a>
                                 </div>
@@ -45,16 +47,36 @@ const Footer = () => {
                         <h4 className="mb-3 font-semibold text-gray-900">Useful Links</h4>
                         <ul className="mb-8 grid grid-cols-2 gap-4 text-sm text-gray-600">
                             <li>
-                                <a href="#">Home</a>
+                                <a
+                                    href="/"
+                                    className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                                >
+                                    Home
+                                </a>
                             </li>
                             <li>
-                                <a href="#">Booking Ticket</a>
+                                <a
+                                    href="https://velotiket.com/velosiqrpay"
+                                    className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                                >
+                                    Booking Ticket
+                                </a>
                             </li>
                             <li>
-                                <a href="#">QRPay Store</a>
+                                <a
+                                    href="https://store.qrpay.co.id/"
+                                    className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                                >
+                                    QRPay Store
+                                </a>
                             </li>
                             <li>
-                                <a href="#">Cek Pemesanan</a>
+                                <a
+                                    href="https://velotiket.com/velosiqrpay/cek-pemesanan"
+                                    className="relative after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                                >
+                                    Cek Pemesanan
+                                </a>
                             </li>
                         </ul>
                         <div>
@@ -71,10 +93,35 @@ const Footer = () => {
                     <div>
                         <h4 className="mb-3 font-semibold text-gray-900">Menu Terkait</h4>
                         <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-                            <a href="#">Tiket Pesawat</a>
-                            <a href="#">Tiket Kereta Api</a>
-                            <a href="#">Tiket Pelni</a>
-                            <a href="#">Tiket Hotel</a>
+                            <a
+                                href="https://velotiket.com/velosiqrpay"
+                                className="relative w-fit after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                            >
+                                Tiket Pesawat
+                            </a>
+                            <a
+                                href="https://velotiket.com/velosiqrpay"
+                                className="relative w-fit after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                            >
+                                Tiket Kereta Api
+                            </a>
+                            <a
+                                href="https://velotiket.com/velosiqrpay"
+                                className="relative w-fit after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                            >
+                                Tiket Pelni
+                            </a>
+                            <a
+                                href="https://velotiket.com/velosiqrpay"
+                                className="relative w-fit after:absolute after:bottom-[-2px] after:left-0 after:h-[2px] after:w-full after:scale-x-0 after:bg-[#EF018F] after:transition-transform after:duration-300 hover:after:scale-x-100"
+                            >
+                                Tiket Hotel
+                            </a>
+                        </div>
+                        <div className="mt-24">
+                            <a href="#" className="inline-block">
+                                <img src={Playstore} alt="Get it on Google Play" className="h-12" />
+                            </a>
                         </div>
                     </div>
                 </div>

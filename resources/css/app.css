@@ -65,3 +65,19 @@ body {
     position: static !important;
     width: auto !important;
 }
+
+@keyframes click {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.95);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-click {
+    animation: click 0.2s ease-in-out;
+}
