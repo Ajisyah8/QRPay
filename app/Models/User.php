@@ -6,6 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+// Ensure these classes exist in the App\Models namespace or create them if missing
+use App\Models\Promo;
+use App\Models\Layanan;
+use App\Models\Liburan;
 
 class User extends Authenticatable
 {
@@ -44,5 +49,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    // Relasi ke promo, layanan, liburan
+    public function promos(): HasMany
+    {
+        return $this->hasMany(Promo::class);
+    }
+
+    public function layanans(): HasMany
+    {
+        return $this->hasMany(Layanan::class);
+    }
+
+    public function liburans(): HasMany
+    {
+        return $this->hasMany(Liburan::class);
     }
 }
