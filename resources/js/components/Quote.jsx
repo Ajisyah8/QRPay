@@ -7,7 +7,7 @@ gsap.registerPlugin(Observer);
 export default function InfiniteScroll({
     width = '30rem',
     maxHeight = '100%',
-    negativeMargin = '-0.5em',
+    negativeMargin = '-2.5em',
 
     items = [],
     itemMinHeight = 150,
@@ -131,11 +131,11 @@ export default function InfiniteScroll({
                         className="relative box-border flex items-center justify-center overflow-hidden rounded-[15px] select-none"
                         key={i}
                         style={{
-                            height: `${itemMinHeight * 0.8}px`,
+                            height: `${itemMinHeight * 1.1}px`,
                             marginTop: negativeMargin,
                         }}
                     >
-                        <img src={item.content} alt={`Slide ${i + 1}`} className="h-full w-full object-cover" />
+                        <img src={item.content} alt={`Slide ${i + 1}`} className="h-full w-full object-fill" />
                     </div>
                 ))}
             </div>

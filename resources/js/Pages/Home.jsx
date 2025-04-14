@@ -279,12 +279,12 @@ const Home = () => {
                     </p>
                 </div>
 
-                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     {promoItems.map((item, index) => (
                         <div key={index} className="overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:scale-105">
-                            <img src={item.image} alt={item.title} className="h-60 w-full object-fill" />
-                            <div className="p-4">
-                                <h3 className="font-['DM Sans'] text-center text-sm leading-tight font-bold text-black">{item.title}</h3>
+                            <img src={item.image} alt={item.title} className="h-50 w-full object-fill" />
+                            <div className="p-2">
+                                <h3 className="font-['DM Sans'] text-center text-xs leading-tight font-bold text-black">{item.title}</h3>
                             </div>
                         </div>
                     ))}
