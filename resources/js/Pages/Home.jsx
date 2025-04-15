@@ -311,7 +311,7 @@ const Home = () => {
                     className="h-full w-full"
                 />
             </section>
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-12 sm:py-16 md:py-20 lg:py-25">
+            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
                 <div className="mb-6 text-center sm:mb-8">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
                     <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">
@@ -319,11 +319,10 @@ const Home = () => {
                     </p>
                 </div>
 
-                <div className="relative mx-auto max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-6xl">
+                <div className="relative mx-auto max-w-[280px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-6xl">
                     <Swiper
                         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         effect="coverflow"
-                        grabCursor={true}
                         centeredSlides={true}
                         slidesPerView="auto"
                         initialSlide={2}
@@ -348,11 +347,11 @@ const Home = () => {
                         className="mySwiper !pb-12 sm:!pb-14 md:!pb-16"
                     >
                         {wisataImages.map((src, index) => (
-                            <SwiperSlide key={index} className="!w-[280px] sm:!w-[400px] md:!w-[500px]">
+                            <SwiperSlide key={index} className="!w-[240px] sm:!w-[400px] md:!w-[500px]">
                                 <img
                                     src={src}
                                     alt={`Wisata ${index + 1}`}
-                                    className="h-[200px] w-full rounded-2xl object-cover sm:h-[250px] sm:rounded-3xl md:h-[300px]"
+                                    className="h-[160px] w-full cursor-pointer rounded-2xl object-cover sm:h-[250px] sm:rounded-3xl md:h-[300px]"
                                 />
                             </SwiperSlide>
                         ))}
@@ -380,12 +379,18 @@ const Home = () => {
                             key={index}
                             className="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg sm:rounded-xl"
                         >
-                            <img src={item.image} alt={item.title} className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]" />
-                            <div className="p-2 sm:p-3">
-                                <h3 className="font-['DM Sans'] text-center text-[10px] leading-tight font-bold text-black sm:text-xs md:text-sm">
-                                    {item.title}
-                                </h3>
-                            </div>
+                            <a href="https://velotiket.com/velosiqrpay" rel="noopener noreferrer">
+                                <img
+                                    src={item.image}
+                                    alt={item.title}
+                                    className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]"
+                                />
+                                <div className="p-2 sm:p-3">
+                                    <h3 className="font-['DM Sans'] text-center text-[10px] leading-tight font-bold text-black sm:text-xs md:text-sm">
+                                        {item.title}
+                                    </h3>
+                                </div>
+                            </a>
                         </div>
                     ))}
                 </div>
@@ -402,26 +407,9 @@ const Home = () => {
                 </div>
 
                 <div className="mx-auto max-w-5xl">
-                    <div className="flex flex-row gap-4 sm:hidden">
-                        <div className="grid flex-1 grid-cols-1 gap-4">
-                            {layananItems.slice(0, 5).map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center"
-                                >
-                                    <img
-                                        src={item.image}
-                                        alt={item.label}
-                                        className="h-24 w-24 object-contain transition-transform duration-200 hover:scale-110"
-                                    />
-                                </a>
-                            ))}
-                        </div>
-                        <div className="grid flex-1 grid-cols-1 gap-4">
-                            {layananItems.slice(5).map((item, index) => (
+                    <div className="sm:hidden">
+                        <div className="grid grid-cols-2 gap-8">
+                            {layananItems.map((item, index) => (
                                 <a
                                     key={index}
                                     href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
