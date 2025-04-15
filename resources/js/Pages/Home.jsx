@@ -407,7 +407,7 @@ const Home = () => {
                             {layananItems.slice(0, 5).map((item, index) => (
                                 <a
                                     key={index}
-                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center"
@@ -424,7 +424,7 @@ const Home = () => {
                             {layananItems.slice(5).map((item, index) => (
                                 <a
                                     key={index}
-                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center"
@@ -444,7 +444,7 @@ const Home = () => {
                             {layananItems.slice(0, 5).map((item, index) => (
                                 <a
                                     key={index}
-                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center"
@@ -461,7 +461,7 @@ const Home = () => {
                             {layananItems.slice(5).map((item, index) => (
                                 <a
                                     key={index}
-                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center justify-center"
