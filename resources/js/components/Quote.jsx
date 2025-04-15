@@ -5,13 +5,11 @@ import { useEffect, useRef } from 'react';
 gsap.registerPlugin(Observer);
 
 export default function InfiniteScroll({
-    width = '30rem',
+    width = '100%',
     maxHeight = '100%',
     negativeMargin = '-2.5em',
-
     items = [],
     itemMinHeight = 150,
-
     isTilted = false,
     tiltDirection = 'left',
     autoplay = false,
@@ -108,21 +106,22 @@ export default function InfiniteScroll({
 
     return (
         <div
-            className="relative flex w-full items-center justify-between gap-8 overflow-hidden overscroll-none px-8"
+            className="relative flex min-h-[400px] w-full flex-row items-center justify-between overflow-hidden overscroll-none px-4 py-6 sm:min-h-[500px] md:min-h-[600px]"
             ref={wrapperRef}
             style={{ maxHeight }}
         >
-            <div className="z-10 ml-20 max-w-lg font-['DM_Sans'] text-xl leading-tight font-bold md:text-2xl lg:text-3xl">
-                "Dunia terlalu luas untuk diam di satu tempat, dan hidup terlalu singkat untuk menunda perjalanan."
+            <div className="z-10 -mt-15 w-1/2 max-w-[280px] pl-0 text-left sm:mt-0 sm:max-w-[400px] sm:pl-8 md:max-w-[600px] md:pl-12 lg:pl-16">
+                <p className="font-['DM_Sans'] text-base leading-tight font-bold sm:text-lg md:text-xl lg:text-2xl">
+                    "Dunia terlalu luas untuk diam di satu tempat, dan hidup terlalu singkat untuk menunda perjalanan."
+                </p>
             </div>
 
             <div className="pointer-events-none absolute inset-0 w-full bg-gradient-to-b from-[#CCE0FD] via-[#9EC6FF] to-[#CCE0FD]"></div>
 
             <div
-                className="flex origin-center cursor-grab flex-col overscroll-contain"
+                className="flex w-[140px] origin-center cursor-grab flex-col overscroll-contain sm:w-[200px] md:w-[280px]"
                 ref={containerRef}
                 style={{
-                    width: '400px',
                     transform: getTiltTransform(),
                 }}
             >
@@ -131,11 +130,11 @@ export default function InfiniteScroll({
                         className="relative box-border flex items-center justify-center overflow-hidden rounded-[15px] select-none"
                         key={i}
                         style={{
-                            height: `${itemMinHeight * 1.1}px`,
+                            height: `${itemMinHeight * (window.innerWidth < 640 ? 0.7 : window.innerWidth < 768 ? 0.8 : 0.9)}px`,
                             marginTop: negativeMargin,
                         }}
                     >
-                        <img src={item.content} alt={`Slide ${i + 1}`} className="h-full w-full object-fill" />
+                        <img src={item.content} alt={`Slide ${i + 1}`} className="h-full w-full object-cover" />
                     </div>
                 ))}
             </div>
