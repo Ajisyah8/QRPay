@@ -170,23 +170,28 @@ const Home = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5 }}
-                className="bg-gradient-to-b from-[#8FD8FA] to-[#CCE0FD] py-16 font-['DM_Sans']"
+                className="bg-gradient-to-b from-[#8FD8FA] to-[#CCE0FD] py-25 font-['DM_Sans']"
             >
-                <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 md:grid-cols-2">
-                    <motion.div initial={{ x: -100, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
+                <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-6 px-4 sm:gap-8 md:grid-cols-2 md:gap-10">
+                    <motion.div
+                        initial={{ x: -100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="py-8 text-center md:py-0 md:text-left"
+                    >
                         <motion.img
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                             src={Wave}
                             alt="wave"
-                            className="mb-4 w-20"
+                            className="mx-auto mb-4 w-16 sm:w-18 md:mx-0 md:w-20"
                         />
                         <motion.h1
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.4 }}
-                            className="mb-6 text-3xl leading-tight font-bold text-black md:text-4xl"
+                            className="mb-4 text-2xl leading-tight font-bold text-black sm:mb-6 sm:text-3xl md:text-4xl"
                         >
                             Sistem Digital untuk Pejalanan
                             <br />
@@ -196,10 +201,10 @@ const Home = () => {
                             initial={{ y: 20, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ duration: 0.5, delay: 0.5 }}
-                            className="text-md mb-6 text-gray-700"
+                            className="mb-6 text-sm text-gray-700 sm:text-base md:text-lg"
                         >
                             <span className="font-medium text-[#EF018F]">QR Pay</span> bantu kamu pesan tiket perjalanan dengan praktis.
-                            <br />
+                            <br className="hidden sm:block" />
                             Aman, cepat, dan langsung terkonfirmasi.
                         </motion.p>
                         <motion.button
@@ -209,7 +214,7 @@ const Home = () => {
                             whileTap={{ scale: 0.95 }}
                             transition={{ duration: 0.5, delay: 0.6 }}
                             onClick={() => document.getElementById('services-section').scrollIntoView({ behavior: 'smooth' })}
-                            className="cursor-pointer rounded-full bg-blue-600 px-6 py-3 text-white shadow-md transition duration-200 hover:bg-blue-700"
+                            className="cursor-pointer rounded-full bg-blue-600 px-4 py-2.5 text-sm text-white shadow-md transition duration-200 hover:bg-blue-700 sm:px-6 sm:py-3 sm:text-base"
                         >
                             Pesan Tiket Sekarang
                         </motion.button>
@@ -219,45 +224,52 @@ const Home = () => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="relative flex h-[500px] w-full items-center justify-center"
+                        className="relative h-[300px] w-full overflow-hidden sm:h-[400px] md:h-[450px] lg:h-[500px]"
                     >
-                        <motion.img
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            src={Tugu}
-                            alt="Monas"
-                            className="ml-50 h-[420px]"
-                        />
+                        <div className="absolute inset-0 flex items-center justify-center">
+                            <motion.img
+                                initial={{ y: 100, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ duration: 0.8, delay: 0.5 }}
+                                src={Tugu}
+                                alt="Tugu"
+                                className="relative z-10 h-[250px] w-auto object-contain sm:h-[300px] md:h-[350px] lg:h-[420px]"
+                            />
 
-                        <motion.img
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.5, delay: 0.6 }}
-                            src={Jembatan}
-                            className="absolute top-0 right-[250px] h-[150px] w-[150px] rounded-full"
-                        />
-                        <motion.img
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.5, delay: 0.7 }}
-                            src={Pantai}
-                            className="absolute bottom-[230px] left-[180px] h-[80px] w-[80px] rounded-full"
-                        />
-                        <motion.img
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 0.5, delay: 0.8 }}
-                            src={Lagoi}
-                            className="absolute top-[80px] right-[-40px] h-[90px] w-[90px] rounded-full"
-                        />
+                            <motion.img
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.6 }}
+                                src={Jembatan}
+                                className="absolute top-[5%] right-[50%] z-20 h-[80px] w-[80px] rounded-full sm:top-[8%] sm:right-[50%] sm:h-[100px] sm:w-[100px] md:top-[6%] md:right-[50%] md:h-[120px] md:w-[120px] lg:top-[5%] lg:right-[55%] lg:h-[150px] lg:w-[150px]"
+                            />
+                            <motion.img
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.7 }}
+                                src={Pantai}
+                                className="absolute top-[45%] left-[10%] z-20 h-[50px] w-[50px] rounded-full sm:top-[50%] sm:left-[26%] sm:h-[60px] sm:w-[60px] md:top-[48%] md:left-[8%] md:h-[70px] md:w-[70px] lg:top-[45%] lg:left-[13%] lg:h-[80px] lg:w-[80px]"
+                            />
+                            <motion.img
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 1 }}
+                                transition={{ duration: 0.5, delay: 0.8 }}
+                                src={Lagoi}
+                                className="absolute top-[15%] right-[3%] z-20 h-[60px] w-[60px] rounded-full sm:top-[20%] sm:right-[25%] sm:h-[70px] sm:w-[70px] md:top-[17%] md:right-[4%] md:h-[80px] md:w-[80px] lg:top-[15%] lg:right-[10%] lg:h-[90px] lg:w-[90px]"
+                            />
+                        </div>
                     </motion.div>
                 </div>
             </motion.section>
-            <section className="overflow-hidden bg-[#CCE0FD] py-8">
-                <div className="animate-marquee flex w-max items-center whitespace-nowrap">
+            <section className="overflow-hidden bg-[#CCE0FD] py-2 sm:py-3 md:py-4">
+                <div className="animate-marquee flex w-max items-center justify-center px-2 whitespace-nowrap sm:px-4">
                     {[...logos, ...logos].map((logo, index) => (
-                        <img key={index} src={logo} alt="Airline Logo" className="mx-6 h-12 w-auto max-w-[100px] object-contain" />
+                        <img
+                            key={index}
+                            src={logo}
+                            alt="Airline Logo"
+                            className="mx-2 h-6 w-auto max-w-[50px] object-contain sm:mx-3 sm:h-8 sm:max-w-[65px] md:mx-4 md:h-10 md:max-w-[80px]"
+                        />
                     ))}
                 </div>
             </section>
@@ -288,16 +300,26 @@ const Home = () => {
                     ))}
                 </div>
             </section>
-            <section style={{ height: '500px', position: 'relative' }}>
-                <InfiniteScroll items={items} isTilted={true} tiltDirection="left" autoplay={true} autoplaySpeed={2.0} autoplayDirection="down" />
+            <section className="relative h-[300px] overflow-hidden sm:h-[400px] md:h-[500px]">
+                <InfiniteScroll
+                    items={items}
+                    isTilted={true}
+                    tiltDirection="left"
+                    autoplay={true}
+                    autoplaySpeed={2.0}
+                    autoplayDirection="down"
+                    className="h-full w-full"
+                />
             </section>
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-25">
-                <div className="mb-8 text-center">
-                    <h2 className="text-3xl font-bold text-[#1B1B1F]">Rekomendasi Tempat Wisata</h2>
-                    <p className="mt-2 font-bold text-[#EF2DA2]">Butuh ide liburan? Cek tempat wisata terbaik yang kami pilih khusus untukmu!</p>
+            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-12 sm:py-16 md:py-20 lg:py-25">
+                <div className="mb-6 text-center sm:mb-8">
+                    <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
+                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">
+                        Butuh ide liburan? Cek tempat wisata terbaik yang kami pilih khusus untukmu!
+                    </p>
                 </div>
 
-                <div className="relative mx-auto max-w-6xl">
+                <div className="relative mx-auto max-w-[320px] sm:max-w-[500px] md:max-w-[700px] lg:max-w-6xl">
                     <Swiper
                         modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         effect="coverflow"
@@ -323,83 +345,135 @@ const Home = () => {
                             nextEl: '.swiper-button-next',
                             prevEl: '.swiper-button-prev',
                         }}
-                        className="mySwiper !pb-16"
+                        className="mySwiper !pb-12 sm:!pb-14 md:!pb-16"
                     >
                         {wisataImages.map((src, index) => (
-                            <SwiperSlide key={index} className="!w-[500px]">
-                                <img src={src} alt={`Wisata ${index + 1}`} className="h-[300px] w-full rounded-3xl object-cover" />
+                            <SwiperSlide key={index} className="!w-[280px] sm:!w-[400px] md:!w-[500px]">
+                                <img
+                                    src={src}
+                                    alt={`Wisata ${index + 1}`}
+                                    className="h-[200px] w-full rounded-2xl object-cover sm:h-[250px] sm:rounded-3xl md:h-[300px]"
+                                />
                             </SwiperSlide>
                         ))}
-                        <div className="mt-8 flex items-center justify-center gap-8">
-                            <div className="swiper-button-prev !static !h-8 !w-8 !text-gray-800 after:!text-lg"></div>
+                        <div className="mt-6 flex items-center justify-center gap-4 sm:mt-8 sm:gap-6 md:gap-8">
+                            <div className="swiper-button-prev !static !h-6 !w-6 !text-gray-800 after:!text-base sm:!h-7 sm:!w-7 sm:after:!text-lg md:!h-8 md:!w-8"></div>
                             <div className="swiper-pagination !static"></div>
-                            <div className="swiper-button-next !static !h-8 !w-8 !text-gray-800 after:!text-lg"></div>
+                            <div className="swiper-button-next !static !h-6 !w-6 !text-gray-800 after:!text-base sm:!h-7 sm:!w-7 sm:after:!text-lg md:!h-8 md:!w-8"></div>
                         </div>
                     </Swiper>
                 </div>
             </section>
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-5">
-                <div className="mb-10 text-center">
-                    <h2 className="text-3xl font-bold text-[#1B1B1F]">Promo Menarik</h2>
-                    <p className="mt-2 font-bold text-[#EF2DA2]">
-                        Nikmati berbagai promo dan layanan spesial dari kami <br />
+            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-8 sm:py-10 md:py-12">
+                <div className="mb-6 text-center sm:mb-8 md:mb-10">
+                    <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Promo Menarik</h2>
+                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">
+                        Nikmati berbagai promo dan layanan spesial dari kami
+                        <br className="hidden sm:block" />
                         dengan harga yang lebih hemat.
                     </p>
                 </div>
 
-                <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-2 sm:grid-cols-2 sm:gap-4 sm:px-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-6">
                     {promoItems.map((item, index) => (
-                        <div key={index} className="overflow-hidden rounded-xl bg-white shadow-lg transition duration-300 hover:scale-105">
-                            <img src={item.image} alt={item.title} className="h-50 w-full object-fill" />
-                            <div className="p-2">
-                                <h3 className="font-['DM Sans'] text-center text-xs leading-tight font-bold text-black">{item.title}</h3>
+                        <div
+                            key={index}
+                            className="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg sm:rounded-xl"
+                        >
+                            <img src={item.image} alt={item.title} className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]" />
+                            <div className="p-2 sm:p-3">
+                                <h3 className="font-['DM Sans'] text-center text-[10px] leading-tight font-bold text-black sm:text-xs md:text-sm">
+                                    {item.title}
+                                </h3>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
             <section
-                className="font-['DM Sans'] px-4 py-16"
+                className="font-['DM Sans'] px-4 py-8 sm:py-12 md:py-16"
                 style={{
                     background: 'linear-gradient(to bottom, #CCE0FD, #FFFFFF)',
                 }}
             >
-                <div className="mb-10 text-center">
-                    <h2 className="text-2xl font-bold text-[#1B1B1F]">Butuh Layanan Lainnya?</h2>
-                    <p className="mt-2 font-bold text-[#EF2DA2]">Klik ikon di bawah untuk pesan langsung lewat WhatsApp!</p>
+                <div className="mb-6 text-center sm:mb-8 md:mb-10">
+                    <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Butuh Layanan Lainnya?</h2>
+                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">Klik ikon di bawah untuk pesan langsung lewat WhatsApp!</p>
                 </div>
 
-                <div className="mx-auto grid max-w-5xl grid-cols-5 justify-items-center gap-4">
-                    {layananItems.slice(0, 5).map((item, index) => (
-                        <a
-                            key={index}
-                            href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center"
-                        >
-                            <img
-                                src={item.image}
-                                alt={item.label}
-                                className="h-40 w-40 object-contain transition-transform duration-200 hover:scale-110"
-                            />
-                        </a>
-                    ))}
-                    <div className="col-span-5 mt-4 flex justify-center gap-12">
-                        {layananItems.slice(5).map((item, index) => (
-                            <a
-                                key={index}
-                                href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                <img
-                                    src={item.image}
-                                    alt={item.label}
-                                    className="h-40 w-40 object-contain transition-transform duration-200 hover:scale-110"
-                                />
-                            </a>
-                        ))}
+                <div className="mx-auto max-w-5xl">
+                    <div className="flex flex-row gap-4 sm:hidden">
+                        <div className="grid flex-1 grid-cols-1 gap-4">
+                            {layananItems.slice(0, 5).map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.label}
+                                        className="h-24 w-24 object-contain transition-transform duration-200 hover:scale-110"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                        <div className="grid flex-1 grid-cols-1 gap-4">
+                            {layananItems.slice(5).map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.label}
+                                        className="h-24 w-24 object-contain transition-transform duration-200 hover:scale-110"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="hidden sm:block">
+                        <div className="grid grid-cols-5 justify-items-center gap-4">
+                            {layananItems.slice(0, 5).map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.label}
+                                        className="h-28 w-28 object-contain transition-transform duration-200 hover:scale-110 md:h-32 md:w-32 lg:h-40 lg:w-40"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+                        <div className="mt-4 flex justify-center gap-12">
+                            {layananItems.slice(5).map((item, index) => (
+                                <a
+                                    key={index}
+                                    href={`https://wa.me/6281274141926?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center justify-center"
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.label}
+                                        className="h-28 w-28 object-contain transition-transform duration-200 hover:scale-110 md:h-32 md:w-32 lg:h-40 lg:w-40"
+                                    />
+                                </a>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </section>
