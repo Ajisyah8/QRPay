@@ -1,4 +1,6 @@
+import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -81,75 +83,75 @@ const items = [
     { content: Torun },
 ];
 
-const services = [
-    {
-        title: 'Pesawat',
-        desc: 'Tiket pesawat domestik & internasional? Pesan gampang di QR Pay!',
-        img: Pesawat,
-    },
-    {
-        title: 'Kereta Api',
-        desc: 'Siap bepergian naik kereta? Yuk, pesan tiketnya sekarang biar gak kehabisan!',
-        img: Kereta,
-    },
-    {
-        title: 'Kapal Laut',
-        desc: 'Mau menyeberang antar pulau? Tiket kapal laut bisa kamu pesan langsung dari sini!',
-        img: Kapal,
-    },
-    {
-        title: 'Bus & Travel',
-        desc: 'Butuh tiket bus ke luar kota? Cari rute bus & travel favoritmu dan pesan langsung di sini!',
-        img: Bus,
-    },
-    {
-        title: 'Hotel',
-        desc: 'Staycation atau liburan jauh? Pesan hotel jadi makin gampang di QR Pay!',
-        img: Hotel,
-    },
-    {
-        title: 'Tiket Wisata',
-        desc: 'Mau liburan seru? Pesan tiket tempat wisata favoritmu di QR Pay!',
-        img: Ticket,
-    },
-];
+// const services = [
+//     {
+//         title: 'Pesawat',
+//         desc: 'Tiket pesawat domestik & internasional? Pesan gampang di QR Pay!',
+//         img: Pesawat,
+//     },
+//     {
+//         title: 'Kereta Api',
+//         desc: 'Siap bepergian naik kereta? Yuk, pesan tiketnya sekarang biar gak kehabisan!',
+//         img: Kereta,
+//     },
+//     {
+//         title: 'Kapal Laut',
+//         desc: 'Mau menyeberang antar pulau? Tiket kapal laut bisa kamu pesan langsung dari sini!',
+//         img: Kapal,
+//     },
+//     {
+//         title: 'Bus & Travel',
+//         desc: 'Butuh tiket bus ke luar kota? Cari rute bus & travel favoritmu dan pesan langsung di sini!',
+//         img: Bus,
+//     },
+//     {
+//         title: 'Hotel',
+//         desc: 'Staycation atau liburan jauh? Pesan hotel jadi makin gampang di QR Pay!',
+//         img: Hotel,
+//     },
+//     {
+//         title: 'Tiket Wisata',
+//         desc: 'Mau liburan seru? Pesan tiket tempat wisata favoritmu di QR Pay!',
+//         img: Ticket,
+//     },
+// ];
 
-const wisataImages = [Bali, Candi, Komodo, RajaAmpat, Wakatobi];
+// const wisataImages = [Bali, Candi, Komodo, RajaAmpat, Wakatobi];
 
-const promoItems = [
-    {
-        title: 'Promo Harga Papan',
-        image: Promo1,
-    },
-    {
-        title: 'Sewa Mesin Fotocopy',
-        image: Promo2,
-    },
-    {
-        title: 'Jasa Cetak Spanduk',
-        image: Promo3,
-    },
-    {
-        title: 'Media Promosi',
-        image: Promo4,
-    },
-    {
-        title: 'Jasa Rental Kendaraan',
-        image: Promo5,
-    },
-    {
-        title: 'Beli Tiket Pesawat, Kapal, Kereta',
-        image: Promo6,
-    },
-    {
-        title: 'Diskon & Murah',
-        image: Promo7,
-    },
-    {
-        title: 'Jasa Percetakan',
-        image: Promo8,
-    },
-];
+// const promoItems = [
+//     {
+//         title: 'Promo Harga Papan',
+//         image: Promo1,
+//     },
+//     {
+//         title: 'Sewa Mesin Fotocopy',
+//         image: Promo2,
+//     },
+//     {
+//         title: 'Jasa Cetak Spanduk',
+//         image: Promo3,
+//     },
+//     {
+//         title: 'Media Promosi',
+//         image: Promo4,
+//     },
+//     {
+//         title: 'Jasa Rental Kendaraan',
+//         image: Promo5,
+//     },
+//     {
+//         title: 'Beli Tiket Pesawat, Kapal, Kereta',
+//         image: Promo6,
+//     },
+//     {
+//         title: 'Diskon & Murah',
+//         image: Promo7,
+//     },
+//     {
+//         title: 'Jasa Percetakan',
+//         image: Promo8,
+//     },
+// ];
 
 const layananItems = [
     { image: ShuttleBus, label: 'Shuttle Bus' },
@@ -164,6 +166,13 @@ const layananItems = [
 ];
 
 const Home = () => {
+    const { heroes, layanans, liburans } = usePage().props;
+    const [showAllHeroes, setShowAllHeroes] = useState(false);
+    const [showAllLayanans, setShowAllLayanans] = useState(false);
+
+    const displayedHeroes = showAllHeroes ? heroes : heroes.slice(0, 6);
+    const displayedLayanans = showAllLayanans ? layanans : layanans.slice(0, 9);
+
     return (
         <>
             <motion.section
@@ -280,25 +289,60 @@ const Home = () => {
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {services.map((service, idx) => (
-                        <div key={idx} className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-md transition duration-300 hover:shadow-lg">
-                            <div className="flex items-start gap-6">
-                                <img src={service.img} alt={service.title} className="h-16 w-16 self-center object-contain" />
-                                <div className="text-left">
-                                    <h2 className="mb-2 text-lg font-semibold text-[#1B1B1F]">{service.title}</h2>
-                                    <p className="text-sm leading-relaxed text-[#4B4B4B]">{service.desc}</p>
+                    {heroes.length > 0 ? (
+                        <>
+                            {displayedHeroes.map((hero, idx) => (
+                                <div
+                                    key={idx}
+                                    className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-md transition duration-300 hover:shadow-lg"
+                                >
+                                    <div className="flex items-start gap-6">
+                                        <img
+                                            src={`/storage/${hero.gambar ?? 'default-hero.png'}`}
+                                            alt={hero.name}
+                                            className="h-16 w-16 self-center object-contain"
+                                        />
+                                        <div className="text-left">
+                                            <h2 className="mb-2 text-lg font-semibold text-[#1B1B1F]">{hero.name}</h2>
+                                            <p
+                                                className="text-sm leading-relaxed text-[#4B4B4B]"
+                                                dangerouslySetInnerHTML={{ __html: hero.description ?? '-' }}
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="mt-auto pt-6">
+                                        {hero.link ? (
+                                            <a href={hero.link} target="_blank" rel="noopener noreferrer">
+                                                <button className="w-full cursor-pointer rounded-full bg-[#EF2DA2B2] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#EF2DA2]">
+                                                    Pesan Sekarang
+                                                </button>
+                                            </a>
+                                        ) : (
+                                            <button
+                                                disabled
+                                                className="w-full cursor-not-allowed rounded-full bg-gray-300 px-6 py-3 font-semibold text-white"
+                                            >
+                                                Link Tidak Tersedia
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="mt-auto pt-6">
-                                <a href="https://velotiket.com/velosiqrpay" target="_blank">
-                                    <button className="w-full cursor-pointer rounded-full bg-[#EF2DA2B2] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#EF2DA2]">
-                                        Pesan Sekarang
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    ))}
+                            ))}
+                        </>
+                    ) : (
+                        <p className="col-span-full text-center text-gray-500">Belum ada layanan tersedia.</p>
+                    )}
                 </div>
+                {heroes.length > 6 && !showAllHeroes && (
+                    <div className="mt-8 text-center">
+                        <button
+                            onClick={() => setShowAllHeroes(true)}
+                            className="cursor-pointer rounded-full bg-blue-600 px-4 py-1 text-sm text-white shadow-md transition duration-200 hover:bg-blue-700 sm:px-6 sm:py-3 sm:text-base"
+                        >
+                            Lihat Selengkapnya
+                        </button>
+                    </div>
+                )}
             </section>
             <section className="relative h-[300px] overflow-hidden sm:h-[400px] md:h-[500px]">
                 <InfiniteScroll
@@ -311,6 +355,7 @@ const Home = () => {
                     className="h-full w-full"
                 />
             </section>
+
             <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
                 <div className="mb-6 text-center sm:mb-8">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
@@ -346,15 +391,19 @@ const Home = () => {
                         }}
                         className="mySwiper !pb-12 sm:!pb-14 md:!pb-16"
                     >
-                        {wisataImages.map((src, index) => (
-                            <SwiperSlide key={index} className="!w-[240px] sm:!w-[400px] md:!w-[500px]">
-                                <img
-                                    src={src}
-                                    alt={`Wisata ${index + 1}`}
-                                    className="h-[160px] w-full cursor-pointer rounded-2xl object-cover sm:h-[250px] sm:rounded-3xl md:h-[300px]"
-                                />
-                            </SwiperSlide>
-                        ))}
+                        {liburans.length > 0 ? (
+                            liburans.map((item, index) => (
+                                <SwiperSlide key={index} className="!w-[240px] sm:!w-[400px] md:!w-[500px]">
+                                    <img
+                                        src={`/storage/${item.gambar ?? 'default-liburan.jpg'}`}
+                                        alt={`Liburan ${index + 1}`}
+                                        className="h-[160px] w-full cursor-pointer rounded-2xl object-cover sm:h-[250px] sm:rounded-3xl md:h-[300px]"
+                                    />
+                                </SwiperSlide>
+                            ))
+                        ) : (
+                            <div className="w-full py-10 text-center text-gray-500">Belum ada data liburan tersedia.</div>
+                        )}
                         <div className="mt-6 flex items-center justify-center gap-4 sm:mt-8 sm:gap-6 md:gap-8">
                             <div className="swiper-button-prev !static !h-6 !w-6 !text-gray-800 after:!text-base sm:!h-7 sm:!w-7 sm:after:!text-lg md:!h-8 md:!w-8"></div>
                             <div className="swiper-pagination !static"></div>
@@ -374,26 +423,44 @@ const Home = () => {
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-2 sm:grid-cols-2 sm:gap-4 sm:px-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-6">
-                    {promoItems.map((item, index) => (
-                        <div
-                            key={index}
-                            className="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg sm:rounded-xl"
-                        >
-                            <a href="https://velotiket.com/velosiqrpay" rel="noopener noreferrer">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]"
-                                />
-                                <div className="p-2 sm:p-3">
-                                    <h3 className="font-['DM Sans'] text-center text-[10px] leading-tight font-bold text-black sm:text-xs md:text-sm">
-                                        {item.title}
-                                    </h3>
-                                </div>
-                            </a>
-                        </div>
-                    ))}
+                    {displayedLayanans.length > 0 ? (
+                        displayedLayanans.map((item, index) => (
+                            <div
+                                key={index}
+                                className="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg sm:rounded-xl"
+                            >
+                                <a
+                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(item.judul)}`}
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    <img
+                                        src={`/storage/${item.gambar ?? 'default-layanan.jpg'}`}
+                                        alt={item.judul}
+                                        className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]"
+                                    />
+                                    <div className="p-2 sm:p-3">
+                                        <h3 className="font-['DM Sans'] text-center text-[10px] font-bold text-black sm:text-xs md:text-sm">
+                                            {item.judul}
+                                        </h3>
+                                    </div>
+                                </a>
+                            </div>
+                        ))
+                    ) : (
+                        <p className="col-span-full text-center text-gray-500">Belum ada layanan tersedia.</p>
+                    )}
                 </div>
+                {layanans.length > 9 && !showAllLayanans && (
+                    <div className="mt-8 text-center">
+                        <button
+                            onClick={() => setShowAllLayanans(true)}
+                            className="cursor-pointer rounded-full bg-blue-600 px-4 py-1 text-sm text-white shadow-md transition duration-200 hover:bg-blue-700 sm:px-6 sm:py-3 sm:text-base"
+                        >
+                            Lihat Selengkapnya
+                        </button>
+                    </div>
+                )}
             </section>
             <section
                 className="font-['DM Sans'] px-4 py-8 sm:py-12 md:py-16"

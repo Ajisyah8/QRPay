@@ -41,8 +41,8 @@ class HeroResource extends Resource
                     ->maxLength(255),
                 Forms\Components\RichEditor::make('description')
                     ->required()
-                    ->columnSpanFull()
-                    ->maxLength(255),
+                    ->columnSpanFull(),
+                    
                 Forms\Components\TextInput::make('link')
 
                     ->maxLength(255),
