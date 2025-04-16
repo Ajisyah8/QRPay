@@ -5,10 +5,9 @@ import Logo from './assets/qrpay.png';
 
 const Footer = () => {
     return (
-        <footer className="font-['DM Sans'] relative overflow-hidden bg-white pt-8 pb-[150px] sm:pt-10 md:pt-12 md:pb-[200px]">
+        <footer className="font-['DM Sans'] relative overflow-hidden bg-gray-50 pt-8 pb-[150px] sm:pt-10 md:pt-12 md:pb-[200px]">
             <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 gap-8 sm:gap-10 md:grid-cols-3">
-                    {/* First Column */}
                     <div>
                         <img src={Logo} alt="QRPay Logo" className="mb-4 h-8 sm:h-10" />
                         <div className="flex flex-col gap-3">
@@ -100,7 +99,7 @@ const Footer = () => {
                                     <FaWhatsapp className="text-black" />
                                     <span className="text-xs font-semibold text-gray-700 sm:text-sm">Need help? Call us</span>
                                 </div>
-                                <p className="mt-2 text-base font-bold text-[#0076E8] sm:text-lg">0822 – 8833 – 4682</p>
+                                <p className="mt-2 text-base font-bold text-[#0052A3] sm:text-lg">0822 – 8833 – 4682</p>
                             </div>
                         </div>
                     </div>

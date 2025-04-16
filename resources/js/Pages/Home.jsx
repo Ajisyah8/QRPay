@@ -9,9 +9,7 @@ import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/module
 import { Swiper, SwiperSlide } from 'swiper/react';
 import InfiniteScroll from '../components/Quote';
 import Jembatan from './assets/jembatan.png';
-import Lagoi from './assets/lagoi.png';
-import Pantai from './assets/pantai.png';
-import Tugu from './assets/tugu siri.png';
+import Tugu from './assets/TuguSirih.png';
 import Wave from './assets/Vector 1.png';
 import BPJS from './layanan/BPJS.png';
 // import Bus from './layanan/Bus.png';
@@ -254,31 +252,6 @@ const Home = () => {
                                 decoding="async"
                                 className="relative z-10 h-[250px] w-auto object-contain sm:h-[300px] md:h-[350px] lg:h-[420px]"
                             />
-
-                            <motion.img
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.6 }}
-                                src={Jembatan}
-                                alt="Jembatan"
-                                className="absolute top-[5%] right-[50%] z-20 h-[80px] w-[80px] rounded-full sm:top-[8%] sm:right-[50%] sm:h-[100px] sm:w-[100px] md:top-[6%] md:right-[50%] md:h-[120px] md:w-[120px] lg:top-[5%] lg:right-[55%] lg:h-[150px] lg:w-[150px]"
-                            />
-                            <motion.img
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.7 }}
-                                src={Pantai}
-                                alt="Pantai"
-                                className="absolute top-[45%] left-[10%] z-20 h-[50px] w-[50px] rounded-full sm:top-[50%] sm:left-[26%] sm:h-[60px] sm:w-[60px] md:top-[48%] md:left-[8%] md:h-[70px] md:w-[70px] lg:top-[45%] lg:left-[13%] lg:h-[80px] lg:w-[80px]"
-                            />
-                            <motion.img
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                transition={{ duration: 0.5, delay: 0.8 }}
-                                src={Lagoi}
-                                alt="Lagoi"
-                                className="absolute top-[15%] right-[3%] z-20 h-[60px] w-[60px] rounded-full sm:top-[20%] sm:right-[25%] sm:h-[70px] sm:w-[70px] md:top-[17%] md:right-[4%] md:h-[80px] md:w-[80px] lg:top-[15%] lg:right-[10%] lg:h-[90px] lg:w-[90px]"
-                            />
                         </div>
                     </motion.div>
                 </div>
@@ -298,7 +271,7 @@ const Home = () => {
             <section className="min-h-screen bg-gradient-to-b from-[#CCE0FD] via-[#7DB0E8] to-[#CCE0FD] px-4 py-20 font-['DM_Sans']" id="services-section">
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
-                    <p className="mt-2 font-bold text-[#A30160]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
+                    <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -372,7 +345,7 @@ const Home = () => {
             <section className="font-['DM Sans'] bg-gradient-to-b from-[#CCE0FD] via-[#99B3DE] to-[#7DA8E8] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
                 <div className="mb-6 text-center sm:mb-8">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
-                    <p className="mt-2 text-sm font-bold text-[#A30160] sm:text-base">
+                    <p className="mt-2 text-sm font-bold text-[#EF018F] sm:text-base">
                         Butuh ide liburan? Cek tempat wisata terbaik yang kami pilih khusus untukmu!
                     </p>
                 </div>
@@ -428,7 +401,7 @@ const Home = () => {
             <section className="font-['DM Sans'] bg-[#7DA8E8] bg-gradient-to-b from-[#7DA8E8] to-[#CCE0FD] px-4 py-8 sm:py-10 md:py-12">
                 <div className="mb-6 text-center sm:mb-8 md:mb-10">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Promo Menarik</h2>
-                    <p className="mt-2 text-sm font-bold text-[#A30160] sm:text-base">
+                    <p className="mt-2 text-sm font-bold text-[#EF018F] sm:text-base">
                         Nikmati berbagai promo dan layanan spesial dari kami
                         <br className="hidden sm:block" />
                         dengan harga yang lebih hemat.
