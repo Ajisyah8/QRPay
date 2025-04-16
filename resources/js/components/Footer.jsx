@@ -24,19 +24,33 @@ const Footer = () => {
                                 <p className="text-xs text-gray-700 sm:text-sm">qrpayonlines@gmail.com</p>
                             </div>
                             <div className="mt-6 sm:mt-10">
-                                <h4 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Follow us</h4>
+                                <h3 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Follow us</h3>
                                 <div className="flex space-x-4 text-lg text-gray-600 sm:text-xl">
                                     <a
                                         href="https://www.facebook.com/people/Qrpaycoid/pfbid02bgksaSKXgb5Nrv9th2v4tyAazdKpVszwBiw2NbHh3eDamonyX78T4ziGj3k7FM1Kl/"
                                         className="hover:text-[#1877F2]"
                                         target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Visit QRPay Facebook page"
                                     >
                                         <FaFacebookF />
                                     </a>
-                                    <a href="http://www.youtube.com/@qrpayonline" className="hover:text-[#FF0000]" target="_blank">
+                                    <a 
+                                        href="http://www.youtube.com/@qrpayonline" 
+                                        className="hover:text-[#FF0000]" 
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Visit QRPay YouTube channel"
+                                    >
                                         <FaYoutube />
                                     </a>
-                                    <a href="https://www.instagram.com/qrpay.co.id" className="hover:text-[#E4405F]" target="_blank">
+                                    <a 
+                                        href="https://www.instagram.com/qrpay.co.id" 
+                                        className="hover:text-[#E4405F]" 
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        aria-label="Visit QRPay Instagram profile"
+                                    >
                                         <FaInstagram />
                                     </a>
                                 </div>
@@ -45,7 +59,7 @@ const Footer = () => {
                     </div>
 
                     <div className="flex flex-col">
-                        <h4 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Useful Links</h4>
+                        <h3 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Useful Links</h3>
                         <ul className="mb-6 grid grid-cols-2 gap-3 text-xs text-gray-600 sm:mb-8 sm:gap-4 sm:text-sm">
                             <li>
                                 <a
@@ -92,7 +106,7 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Menu Terkait</h4>
+                        <h3 className="mb-3 text-sm font-semibold text-gray-900 sm:text-base">Menu Terkait</h3>
                         <div className="grid grid-cols-2 gap-3 text-xs text-gray-600 sm:gap-4 sm:text-sm">
                             <a
                                 href="https://velotiket.com/velosiqrpay"
@@ -120,7 +134,12 @@ const Footer = () => {
                             </a>
                         </div>
                         <div className="mt-16 sm:mt-24">
-                            <a href="#" className="inline-block">
+                            <a 
+                                href="" 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="inline-block"
+                            >
                                 <img src={Playstore} alt="Get it on Google Play" className="h-10 sm:h-12" />
                             </a>
                         </div>
@@ -132,10 +151,10 @@ const Footer = () => {
                 <div className="flex flex-col items-center justify-between gap-2 text-xs text-gray-500 sm:gap-0 sm:text-sm md:flex-row">
                     <p>© 2025 QRPay Inc. All rights reserved.</p>
                     <div className="mt-2 flex flex-wrap justify-center gap-3 sm:gap-4 md:mt-0">
-                        <a href="#">Terms</a>
-                        <a href="#">Privacy policy</a>
-                        <a href="#">Legal notice</a>
-                        <a href="#">Accessibility</a>
+                        <a href="/terms" className="hover:text-gray-700">Terms</a>
+                        <a href="/privacy" className="hover:text-gray-700">Privacy policy</a>
+                        <a href="/legal" className="hover:text-gray-700">Legal notice</a>
+                        <a href="/accessibility" className="hover:text-gray-700">Accessibility</a>
                     </div>
                 </div>
             </div>

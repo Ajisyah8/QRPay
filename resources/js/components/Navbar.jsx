@@ -31,8 +31,12 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button className="p-2 text-black lg:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <button 
+                    className="p-2 text-black lg:hidden" 
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-expanded={isMenuOpen}
+                >
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         {isMenuOpen ? (
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -68,8 +72,12 @@ const Navbar = () => {
                 <div
                     className={`fixed inset-0 z-50 transform bg-white transition-transform duration-300 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
                 >
-                    <div className="flex justify-end p-4">
-                        <button onClick={() => setIsMenuOpen(false)} className="p-2 text-black">
+                     <div className="flex justify-end p-4">
+                        <button 
+                            onClick={() => setIsMenuOpen(false)} 
+                            className="p-2 text-black"
+                            aria-label="Close navigation menu"
+                        >
                             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -96,11 +104,11 @@ const Navbar = () => {
                             </li>
                         ))}
                         <li className="w-full px-4 pt-4">
-                            <a
+                        <a
                                 href="https://wa.me/6282288334682?text=Halo%20QRPay%2C%20saya%20tertarik%20untuk%20bekerjasama%20dengan%20QRPay.%20Boleh%20info%20lebih%20lanjut%3F"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="block w-full cursor-pointer rounded-full bg-[#EF018F] px-4 py-2 text-center text-white shadow-md transition duration-200 hover:bg-pink-600"
+                                className="block w-full cursor-pointer rounded-full bg-[#CC0178] px-4 py-2 text-center text-white shadow-md transition duration-200 hover:bg-[#A30160]"
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 QRPay Synergy

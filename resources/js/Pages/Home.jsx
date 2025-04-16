@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import 'swiper/css';
@@ -14,18 +14,18 @@ import Pantai from './assets/pantai.png';
 import Tugu from './assets/tugu siri.png';
 import Wave from './assets/Vector 1.png';
 import BPJS from './layanan/BPJS.png';
-import Bus from './layanan/Bus.png';
+// import Bus from './layanan/Bus.png';
 import DompetDigital from './layanan/DompetDigital.png';
-import Hotel from './layanan/Hotel.png';
-import Kapal from './layanan/Kapal laut.png';
-import Kereta from './layanan/Kereta api.png';
+// import Hotel from './layanan/Hotel.png';
+// import Kapal from './layanan/Kapal laut.png';
+// import Kereta from './layanan/Kereta api.png';
 import PLN from './layanan/ListrikPLN.png';
 import PBB from './layanan/PBB.png';
 import PDAM from './layanan/PDAM.png';
-import Pesawat from './layanan/Pesawat.png';
+// import Pesawat from './layanan/Pesawat.png';
 import Pulsa from './layanan/Pulsa.png';
 import ShuttleBus from './layanan/ShuttleBus.png';
-import Ticket from './layanan/Ticket.png';
+// import Ticket from './layanan/Ticket.png';
 import TVKabel from './layanan/TV.png';
 import VoucherGames from './layanan/Voucher.png';
 import BatikAir from './partner/batik air.png';
@@ -40,19 +40,19 @@ import Sriwijaya from './partner/Sriwijaya Air.png';
 import SuperAir from './partner/Super Air Jet.png';
 import Trigana from './partner/Trigana Air.png';
 import Wings from './partner/wingsair.png';
-import Promo1 from './promo/Promo1.jpeg';
-import Promo2 from './promo/Promo2.jpeg';
-import Promo3 from './promo/Promo3.jpeg';
-import Promo4 from './promo/Promo4.jpeg';
-import Promo5 from './promo/Promo5.jpeg';
-import Promo6 from './promo/Promo6.jpeg';
-import Promo7 from './promo/Promo7.jpeg';
-import Promo8 from './promo/Promo8.jpeg';
-import Bali from './wisata/bali.jpg';
-import Candi from './wisata/candi.jpg';
-import Komodo from './wisata/komodo.jpg';
-import RajaAmpat from './wisata/rajaAmpat.jpg';
-import Wakatobi from './wisata/wakatobi.jpg';
+// import Promo1 from './promo/Promo1.jpeg';
+// import Promo2 from './promo/Promo2.jpeg';
+// import Promo3 from './promo/Promo3.jpeg';
+// import Promo4 from './promo/Promo4.jpeg';
+// import Promo5 from './promo/Promo5.jpeg';
+// import Promo6 from './promo/Promo6.jpeg';
+// import Promo7 from './promo/Promo7.jpeg';
+// import Promo8 from './promo/Promo8.jpeg';
+// import Bali from './wisata/bali.jpg';
+// import Candi from './wisata/candi.jpg';
+// import Komodo from './wisata/komodo.jpg';
+// import RajaAmpat from './wisata/rajaAmpat.jpg';
+// import Wakatobi from './wisata/wakatobi.jpg';
 import Bagan from './world/Bagan.jpg';
 import Borobudur from './world/borobudur.jpg';
 import Celcus from './world/Celcus.jpg';
@@ -175,6 +175,13 @@ const Home = () => {
 
     return (
         <>
+         <Head>
+                <title>QRPay - Sistem Digital untuk Perjalanan Tanpa Hambatan</title>
+                <meta
+                    name="description"
+                    content="QRPay membantu Anda memesan tiket perjalanan dengan praktis. Nikmati layanan pemesanan tiket yang aman, cepat, dan langsung terkonfirmasi untuk berbagai moda transportasi."
+                />
+            </Head>
             <motion.section
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -236,12 +243,15 @@ const Home = () => {
                         className="relative h-[300px] w-full overflow-hidden sm:h-[400px] md:h-[450px] lg:h-[500px]"
                     >
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.img
+                        <motion.img
                                 initial={{ y: 100, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
                                 src={Tugu}
                                 alt="Tugu"
+                                loading="eager"
+                                fetchPriority="high"
+                                decoding="async"
                                 className="relative z-10 h-[250px] w-auto object-contain sm:h-[300px] md:h-[350px] lg:h-[420px]"
                             />
 
@@ -250,6 +260,7 @@ const Home = () => {
                                 animate={{ scale: 1 }}
                                 transition={{ duration: 0.5, delay: 0.6 }}
                                 src={Jembatan}
+                                alt="Jembatan"
                                 className="absolute top-[5%] right-[50%] z-20 h-[80px] w-[80px] rounded-full sm:top-[8%] sm:right-[50%] sm:h-[100px] sm:w-[100px] md:top-[6%] md:right-[50%] md:h-[120px] md:w-[120px] lg:top-[5%] lg:right-[55%] lg:h-[150px] lg:w-[150px]"
                             />
                             <motion.img
@@ -257,6 +268,7 @@ const Home = () => {
                                 animate={{ scale: 1 }}
                                 transition={{ duration: 0.5, delay: 0.7 }}
                                 src={Pantai}
+                                alt="Pantai"
                                 className="absolute top-[45%] left-[10%] z-20 h-[50px] w-[50px] rounded-full sm:top-[50%] sm:left-[26%] sm:h-[60px] sm:w-[60px] md:top-[48%] md:left-[8%] md:h-[70px] md:w-[70px] lg:top-[45%] lg:left-[13%] lg:h-[80px] lg:w-[80px]"
                             />
                             <motion.img
@@ -264,6 +276,7 @@ const Home = () => {
                                 animate={{ scale: 1 }}
                                 transition={{ duration: 0.5, delay: 0.8 }}
                                 src={Lagoi}
+                                alt="Lagoi"
                                 className="absolute top-[15%] right-[3%] z-20 h-[60px] w-[60px] rounded-full sm:top-[20%] sm:right-[25%] sm:h-[70px] sm:w-[70px] md:top-[17%] md:right-[4%] md:h-[80px] md:w-[80px] lg:top-[15%] lg:right-[10%] lg:h-[90px] lg:w-[90px]"
                             />
                         </div>
@@ -282,10 +295,10 @@ const Home = () => {
                     ))}
                 </div>
             </section>
-            <section className="min-h-screen bg-[#CCE0FD] px-4 py-20 font-['DM_Sans']" id="services-section">
+            <section className="min-h-screen bg-gradient-to-b from-[#CCE0FD] via-[#7DB0E8] to-[#CCE0FD] px-4 py-20 font-['DM_Sans']" id="services-section">
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
-                    <p className="mt-2 font-bold text-[#EF2DA2]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
+                    <p className="mt-2 font-bold text-[#A30160]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -330,7 +343,7 @@ const Home = () => {
                             ))}
                         </>
                     ) : (
-                        <p className="col-span-full text-center text-gray-500">Belum ada layanan tersedia.</p>
+                        <p className="col-span-full text-center text-gray-700">Belum ada layanan tersedia.</p>
                     )}
                 </div>
                 {heroes.length > 6 && !showAllHeroes && (
@@ -356,10 +369,10 @@ const Home = () => {
                 />
             </section>
 
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
+            <section className="font-['DM Sans'] bg-gradient-to-b from-[#CCE0FD] via-[#99B3DE] to-[#7DA8E8] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
                 <div className="mb-6 text-center sm:mb-8">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
-                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">
+                    <p className="mt-2 text-sm font-bold text-[#A30160] sm:text-base">
                         Butuh ide liburan? Cek tempat wisata terbaik yang kami pilih khusus untukmu!
                     </p>
                 </div>
@@ -402,7 +415,7 @@ const Home = () => {
                                 </SwiperSlide>
                             ))
                         ) : (
-                            <div className="w-full py-10 text-center text-gray-500">Belum ada data liburan tersedia.</div>
+                            <div className="w-full py-10 text-center text-gray-700">Belum ada data liburan tersedia.</div>
                         )}
                         <div className="mt-6 flex items-center justify-center gap-4 sm:mt-8 sm:gap-6 md:gap-8">
                             <div className="swiper-button-prev !static !h-6 !w-6 !text-gray-800 after:!text-base sm:!h-7 sm:!w-7 sm:after:!text-lg md:!h-8 md:!w-8"></div>
@@ -412,10 +425,10 @@ const Home = () => {
                     </Swiper>
                 </div>
             </section>
-            <section className="font-['DM Sans'] bg-[#CCE0FD] px-4 py-8 sm:py-10 md:py-12">
+            <section className="font-['DM Sans'] bg-[#7DA8E8] bg-gradient-to-b from-[#7DA8E8] to-[#CCE0FD] px-4 py-8 sm:py-10 md:py-12">
                 <div className="mb-6 text-center sm:mb-8 md:mb-10">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Promo Menarik</h2>
-                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">
+                    <p className="mt-2 text-sm font-bold text-[#A30160] sm:text-base">
                         Nikmati berbagai promo dan layanan spesial dari kami
                         <br className="hidden sm:block" />
                         dengan harga yang lebih hemat.
@@ -448,7 +461,7 @@ const Home = () => {
                             </div>
                         ))
                     ) : (
-                        <p className="col-span-full text-center text-gray-500">Belum ada layanan tersedia.</p>
+                        <p className="col-span-full text-center text-gray-700">Belum ada layanan tersedia.</p>
                     )}
                 </div>
                 {layanans.length > 9 && !showAllLayanans && (
