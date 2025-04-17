@@ -301,7 +301,7 @@ const Home = () => {
                                     <div className="mt-auto pt-6">
                                         {hero.link ? (
                                             <a href={hero.link} target="_blank" rel="noopener noreferrer">
-                                                <button className="w-full cursor-pointer rounded-full bg-[#D4177F] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#B01368]">
+                                                <button className="w-full cursor-pointer rounded-full bg-[#EF018F] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#B01368]">
                                                     Pesan Sekarang
                                                 </button>
                                             </a>
