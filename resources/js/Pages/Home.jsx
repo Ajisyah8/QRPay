@@ -8,7 +8,6 @@ import 'swiper/css/pagination';
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import InfiniteScroll from '../components/Quote';
-import Jembatan from './assets/jembatan.png';
 import Tugu from './assets/TuguSirih.png';
 import Wave from './assets/Vector 1.png';
 import BPJS from './layanan/BPJS.png';
@@ -173,7 +172,7 @@ const Home = () => {
 
     return (
         <>
-         <Head>
+            <Head>
                 <title>QRPay - Sistem Digital untuk Perjalanan Tanpa Hambatan</title>
                 <meta
                     name="description"
@@ -241,7 +240,7 @@ const Home = () => {
                         className="relative h-[300px] w-full overflow-hidden sm:h-[400px] md:h-[450px] lg:h-[500px]"
                     >
                         <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.img
+                            <motion.img
                                 initial={{ y: 100, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.5 }}
@@ -268,7 +267,10 @@ const Home = () => {
                     ))}
                 </div>
             </section>
-            <section className="min-h-screen bg-gradient-to-b from-[#CCE0FD] via-[#7DB0E8] to-[#CCE0FD] px-4 py-20 font-['DM_Sans']" id="services-section">
+            <section
+                className="min-h-screen bg-gradient-to-b from-[#CCE0FD] via-[#7DB0E8] to-[#CCE0FD] px-4 py-20 font-['DM_Sans']"
+                id="services-section"
+            >
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
                     <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
@@ -280,7 +282,7 @@ const Home = () => {
                             {displayedHeroes.map((hero, idx) => (
                                 <div
                                     key={idx}
-                                    className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-md transition duration-300 hover:shadow-lg"
+                                    className="flex h-full flex-col rounded-2xl bg-gray-50 p-8 shadow-md transition duration-300 hover:shadow-lg"
                                 >
                                     <div className="flex items-start gap-6">
                                         <img
@@ -299,7 +301,7 @@ const Home = () => {
                                     <div className="mt-auto pt-6">
                                         {hero.link ? (
                                             <a href={hero.link} target="_blank" rel="noopener noreferrer">
-                                                <button className="w-full cursor-pointer rounded-full bg-[#EF2DA2B2] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#EF2DA2]">
+                                                <button className="w-full cursor-pointer rounded-full bg-[#D4177F] px-6 py-3 font-semibold text-white transition duration-200 hover:bg-[#B01368]">
                                                     Pesan Sekarang
                                                 </button>
                                             </a>
