@@ -5,7 +5,7 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot, hydrateRoot } from 'react-dom/client';
 import Footer from './components/Footer';
-import AdModal from './components/Modal';
+// import AdModal from './components/Modal';
 import Navbar from './components/Navbar';
 
 const appName = import.meta.env.VITE_APP_NAME || 'QRPay';
@@ -20,7 +20,7 @@ createInertiaApp({
             hydrateRoot(
                 el,
                 <div className="flex min-h-screen flex-col">
-                    <AdModal />
+                    {/* <AdModal /> */}
                     <Navbar />
                     <main className="flex-grow">{PageComponent}</main>
                     <Footer />
@@ -31,7 +31,7 @@ createInertiaApp({
 
         createRoot(el).render(
             <div className="flex min-h-screen flex-col">
-                <AdModal />
+                {/* <AdModal /> */}
                 <Navbar />
                 <main className="flex-grow">{PageComponent}</main>
                 <Footer />

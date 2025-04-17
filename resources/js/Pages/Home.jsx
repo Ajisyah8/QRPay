@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Autoplay, EffectCoverflow, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import AdModal from '../components/Modal';
 import InfiniteScroll from '../components/Quote';
 import Tugu from './assets/TuguSirih.png';
 import Wave from './assets/Vector 1.png';
@@ -163,7 +164,7 @@ const layananItems = [
 ];
 
 const Home = () => {
-    const { heroes, layanans, liburans } = usePage().props;
+    const { heroes, promos, layanans, liburans } = usePage().props;
     const [showAllHeroes, setShowAllHeroes] = useState(false);
     const [showAllLayanans, setShowAllLayanans] = useState(false);
 
@@ -172,6 +173,7 @@ const Home = () => {
 
     return (
         <>
+            <AdModal promos={promos} />
             <Head>
                 <title>QRPay - Sistem Digital untuk Perjalanan Tanpa Hambatan</title>
                 <meta charSet="UTF-8" />
@@ -418,7 +420,7 @@ const Home = () => {
                     </p>
                 </div>
 
-                <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-2 sm:grid-cols-2 sm:gap-4 sm:px-4 md:grid-cols-3 md:gap-5 lg:grid-cols-4 lg:gap-6">
+                <div className="mx-auto grid max-w-6xl grid-cols-1 gap-3 px-2 sm:grid-cols-2 sm:gap-4 sm:px-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-6">
                     {displayedLayanans.length > 0 ? (
                         displayedLayanans.map((item, index) => (
                             <div
@@ -433,7 +435,7 @@ const Home = () => {
                                     <img
                                         src={`/storage/${item.gambar ?? 'default-layanan.jpg'}`}
                                         alt={item.judul}
-                                        className="h-[120px] w-full object-cover sm:h-[160px] md:h-[180px] lg:h-[200px]"
+                                        className="h-[280px] w-full object-fill sm:h-[280px] md:h-[270px] lg:h-[250px]"
                                     />
                                     <div className="p-2 sm:p-3">
                                         <h3 className="font-['DM Sans'] text-center text-[10px] font-bold text-black sm:text-xs md:text-sm">

@@ -18,6 +18,9 @@ class Promo extends Model
         'judul',
         'deskripsi',
         'gambar',
+        'status',
+        'tgl_mulai',
+        'tgl_selesai',
     ];
 
     protected $dates = ['deleted_at'];
