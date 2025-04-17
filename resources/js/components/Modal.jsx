@@ -37,37 +37,32 @@ const AdModal = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
+                    onClick={handleClose}
                 >
                     <motion.div
-                        className="relative mx-4 flex w-full max-w-lg flex-col items-center justify-center"
+                        className="relative mx-4 flex w-full max-w-[90%] flex-col items-center justify-center sm:max-w-[85%] md:max-w-[75%] lg:max-w-2xl"
                         initial={{ scale: 0.95, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0.95, opacity: 0 }}
                         transition={{ type: 'spring', stiffness: 300 }}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        <motion.img
-                            key={images[currentIndex].src}
-                            src={images[currentIndex].src}
-                            alt={`Iklan ${currentIndex + 1}`}
-                            className="h-[50vh] w-full rounded-md object-cover"
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -50 }}
-                            transition={{ duration: 0.5 }}
-                        />
-
-                        <div className="absolute top-3 right-3">
-                            <button
-                                onClick={handleClose}
-                                className="text-bold flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white text-lg text-black shadow-md transition-all duration-200 hover:scale-110 hover:rotate-180 hover:shadow-lg"
-                            >
-                                ✕
-                            </button>
+                        <div className="relative w-full">
+                            <motion.img
+                                key={images[currentIndex].src}
+                                src={images[currentIndex].src}
+                                alt={`Iklan ${currentIndex + 1}`}
+                                className="h-[40vh] min-h-[200px] w-full rounded-lg object-contain sm:h-[45vh] md:h-[50vh] lg:h-[60vh]"
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -50 }}
+                                transition={{ duration: 0.5 }}
+                            />
                         </div>
 
-                        <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 transform space-x-2">
+                        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 transform space-x-1.5 sm:bottom-6 sm:space-x-2">
                             {images.map((_, i) => (
-                                <div key={i} className={`h-3 w-3 rounded-full ${i === currentIndex ? 'bg-blue-500' : 'bg-gray-300'}`} />
+                                <div key={i} className={`h-2 w-2 rounded-full sm:h-3 sm:w-3 ${i === currentIndex ? 'bg-blue-500' : 'bg-gray-300'}`} />
                             ))}
                         </div>
                     </motion.div>
