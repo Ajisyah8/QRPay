@@ -51,6 +51,8 @@ import Wings from './partner/wingsair.png';
 // import Komodo from './wisata/komodo.jpg';
 // import RajaAmpat from './wisata/rajaAmpat.jpg';
 // import Wakatobi from './wisata/wakatobi.jpg';
+import AirAsia from './partner/airasia.png';
+import Transnusa from './partner/transnusa.png';
 import Bagan from './world/Bagan.jpg';
 import Borobudur from './world/borobudur.jpg';
 import Celcus from './world/Celcus.jpg';
@@ -81,76 +83,6 @@ const items = [
     { content: Torun },
 ];
 
-// const services = [
-//     {
-//         title: 'Pesawat',
-//         desc: 'Tiket pesawat domestik & internasional? Pesan gampang di QR Pay!',
-//         img: Pesawat,
-//     },
-//     {
-//         title: 'Kereta Api',
-//         desc: 'Siap bepergian naik kereta? Yuk, pesan tiketnya sekarang biar gak kehabisan!',
-//         img: Kereta,
-//     },
-//     {
-//         title: 'Kapal Laut',
-//         desc: 'Mau menyeberang antar pulau? Tiket kapal laut bisa kamu pesan langsung dari sini!',
-//         img: Kapal,
-//     },
-//     {
-//         title: 'Bus & Travel',
-//         desc: 'Butuh tiket bus ke luar kota? Cari rute bus & travel favoritmu dan pesan langsung di sini!',
-//         img: Bus,
-//     },
-//     {
-//         title: 'Hotel',
-//         desc: 'Staycation atau liburan jauh? Pesan hotel jadi makin gampang di QR Pay!',
-//         img: Hotel,
-//     },
-//     {
-//         title: 'Tiket Wisata',
-//         desc: 'Mau liburan seru? Pesan tiket tempat wisata favoritmu di QR Pay!',
-//         img: Ticket,
-//     },
-// ];
-
-// const wisataImages = [Bali, Candi, Komodo, RajaAmpat, Wakatobi];
-
-// const promoItems = [
-//     {
-//         title: 'Promo Harga Papan',
-//         image: Promo1,
-//     },
-//     {
-//         title: 'Sewa Mesin Fotocopy',
-//         image: Promo2,
-//     },
-//     {
-//         title: 'Jasa Cetak Spanduk',
-//         image: Promo3,
-//     },
-//     {
-//         title: 'Media Promosi',
-//         image: Promo4,
-//     },
-//     {
-//         title: 'Jasa Rental Kendaraan',
-//         image: Promo5,
-//     },
-//     {
-//         title: 'Beli Tiket Pesawat, Kapal, Kereta',
-//         image: Promo6,
-//     },
-//     {
-//         title: 'Diskon & Murah',
-//         image: Promo7,
-//     },
-//     {
-//         title: 'Jasa Percetakan',
-//         image: Promo8,
-//     },
-// ];
-
 const layananItems = [
     { image: ShuttleBus, label: 'Shuttle Bus' },
     { image: Pulsa, label: 'Pulsa' },
@@ -163,13 +95,30 @@ const layananItems = [
     { image: PBB, label: 'PBB' },
 ];
 
+const checkInLogos = [
+    { logo: GarudaIndo, link: 'https://digital.garuda-indonesia.com/ssci/identification' },
+    { logo: LionAir, link: 'https://www.bookcabin.com/check-in' },
+    { logo: Citilink, link: 'https://book.citilink.co.id/SearchWebCheckin.aspx' },
+    { logo: AirAsia, link: 'https://www.airasia.com/check-in/v2/en/gb' },
+    { logo: PelitaAir, link: 'https://pss01.nieve.id/webcheckin/' },
+    { logo: Sriwijaya, link: 'https://sriwijaya-webcheckin.nieve.id/new//' },
+    { logo: Transnusa, link: 'https://www.transnusa.co.id/id/' },
+];
+
 const Home = () => {
     const { heroes, promos, layanans, liburans } = usePage().props;
     const [showAllHeroes, setShowAllHeroes] = useState(false);
     const [showAllLayanans, setShowAllLayanans] = useState(false);
+    const [activeFilter, setActiveFilter] = useState('layanan');
 
     const displayedHeroes = showAllHeroes ? heroes : heroes.slice(0, 6);
     const displayedLayanans = showAllLayanans ? layanans : layanans.slice(0, 9);
+
+    const filteredHeroes = displayedHeroes.filter((hero) => {
+        if (activeFilter === 'layanan') return !hero.is_checkin;
+        if (activeFilter === 'checkin') return hero.is_checkin;
+        return true;
+    });
 
     return (
         <>
@@ -284,12 +233,90 @@ const Home = () => {
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
                     <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
+
+                    <div className="mt-6 flex flex-col items-center justify-center gap-4">
+                        <div className="flex gap-4">
+                            <button
+                                onClick={() => setActiveFilter('layanan')}
+                                className={`cursor-pointer rounded-full px-6 py-2 font-semibold transition-all duration-200 active:scale-95 ${
+                                    activeFilter === 'layanan' ? 'bg-[#EF018F] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                }`}
+                            >
+                                Layanan
+                            </button>
+                            <button
+                                onClick={() => setActiveFilter('checkin')}
+                                className={`cursor-pointer rounded-full px-6 py-2 font-semibold transition-all duration-200 active:scale-95 ${
+                                    activeFilter === 'checkin' ? 'bg-[#EF018F] text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                }`}
+                            >
+                                Check-in
+                            </button>
+                        </div>
+
+                        {activeFilter === 'checkin' && (
+                            <div className="mt-8 flex flex-col gap-6 rounded-3xl px-4 py-8 backdrop-blur-sm sm:px-8 md:px-12 lg:px-16">
+                                <div className="hidden lg:block">
+                                    <div className="grid grid-cols-4 gap-16 px-4">
+                                        {checkInLogos.slice(0, 4).map((item, index) => (
+                                            <div key={index} className="flex items-center justify-center">
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+                                                    <div className="flex items-center justify-center rounded-2xl bg-white/30 p-4 transition-all duration-300 hover:scale-105 hover:bg-white/40">
+                                                        <img src={item.logo} alt="Airline Logo" className="h-28 w-auto max-w-full object-contain" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className="mt-12 grid grid-cols-3 gap-16 px-16">
+                                        {checkInLogos.slice(4, 7).map((item, index) => (
+                                            <div key={index} className="flex items-center justify-center">
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+                                                    <div className="flex items-center justify-center rounded-2xl bg-white/30 p-4 transition-all duration-300 hover:scale-105 hover:bg-white/40">
+                                                        <img src={item.logo} alt="Airline Logo" className="h-28 w-auto max-w-full object-contain" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="hidden md:block lg:hidden">
+                                    <div className="grid grid-cols-3 gap-8">
+                                        {checkInLogos.map((item, index) => (
+                                            <div key={index} className="flex items-center justify-center">
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+                                                    <div className="flex items-center justify-center rounded-xl bg-white/30 p-3 transition-all duration-300 hover:scale-105 hover:bg-white/40">
+                                                        <img src={item.logo} alt="Airline Logo" className="h-24 w-auto max-w-full object-contain" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="md:hidden">
+                                    <div className="grid grid-cols-2 gap-4">
+                                        {checkInLogos.map((item, index) => (
+                                            <div key={index} className="flex items-center justify-center">
+                                                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block w-full">
+                                                    <div className="flex items-center justify-center rounded-lg bg-white/30 p-2 transition-all duration-300 hover:scale-105 hover:bg-white/40">
+                                                        <img src={item.logo} alt="Airline Logo" className="h-20 w-auto max-w-full object-contain" />
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 sm:grid-cols-2 lg:grid-cols-3">
                     {heroes.length > 0 ? (
                         <>
-                            {displayedHeroes.map((hero, idx) => (
+                            {filteredHeroes.map((hero, idx) => (
                                 <div
                                     key={idx}
                                     className="flex h-full flex-col rounded-2xl bg-gray-50 p-8 shadow-md transition duration-300 hover:shadow-lg"
@@ -331,7 +358,7 @@ const Home = () => {
                         <p className="col-span-full text-center text-gray-700">Belum ada layanan tersedia.</p>
                     )}
                 </div>
-                {heroes.length > 6 && !showAllHeroes && (
+                {heroes.length > 6 && !showAllHeroes && filteredHeroes.length > 6 && (
                     <div className="mt-8 text-center">
                         <button
                             onClick={() => setShowAllHeroes(true)}
