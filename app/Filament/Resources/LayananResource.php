@@ -50,6 +50,9 @@ class LayananResource extends Resource
                     ->imagePreviewHeight('150')
                     ->maxSize(1024)
                     ->required(),
+                Forms\Components\TextInput::make('link')
+
+                    ->maxLength(255),
             ]);
     }
 
