@@ -46,6 +46,13 @@ class Dashboard extends Controller
 
     public function apiPromos()
     {
-        return response()->json(Promo::where('status', 'on')->latest()->get());
+        $promos = Promo::where('status', 'on')->latest()->get();
+
+        // Menambahkan URL lengkap untuk setiap gambar
+        foreach ($promos as $promo) {
+            $promo->gambar = asset('storage/' . $promo->gambar);
+        }
+
+        return response()->json($promos);
     }
 }
