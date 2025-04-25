@@ -68,6 +68,8 @@ class LayananResource extends Resource
                 Tables\Columns\ImageColumn::make('gambar')
                     ->disk('public')
                     ->height(60),
+                Tables\Columns\TextColumn::make('link')
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
