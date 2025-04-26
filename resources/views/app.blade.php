@@ -5,14 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>QRPay</title>
+    <!-- SEO Meta -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+    <meta name="theme-color" content="#2864b3">
+    <meta name="author" content="QRPay">
+    <meta name="generator" content="Laravel">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('./logo.png') }}">
+    <!-- Title -->
+    <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('logo.png') }}">
+    <link rel="mask-icon" href="{{ asset('logo.png') }}" color="#2864b3">
 
-    <!-- Scripts -->
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Vite & Inertia -->
     @viteReactRefresh
-    @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
+    @vite(['resources/js/app.jsx'])
     @inertiaHead
 </head>
 

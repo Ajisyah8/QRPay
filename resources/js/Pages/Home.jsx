@@ -124,19 +124,43 @@ const Home = () => {
         <>
             <AdModal promos={promos} />
             <Head>
-                <title>QRPay - Sistem Digital untuk Perjalanan Tanpa Hambatan</title>
+                <title>QRPay - Sistem Pembayaran & Pemesanan Tiket Digital #1 di Indonesia</title>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta
                     name="description"
-                    content="QRPay membantu Anda memesan tiket perjalanan dengan praktis. Nikmati layanan pemesanan tiket yang aman, cepat, dan langsung terkonfirmasi untuk berbagai moda transportasi."
+                    content="QRPay - Platform pembayaran & pemesanan tiket digital terpercaya di Indonesia. Pesan tiket pesawat, kereta, bus & bayar tagihan dengan mudah. Transaksi aman, cepat & terkonfirmasi instan."
                 />
                 <meta
                     name="keywords"
-                    content="QRPay, tiket online, pemesanan tiket, tiket pesawat, tiket kereta, tiket bus, pembayaran digital, travel booking"
+                    content="QRPay, pembayaran digital Indonesia, tiket online, pemesanan tiket, tiket pesawat, tiket kereta api, tiket bus, pembayaran QRIS, travel booking Indonesia, pembayaran tagihan online"
                 />
-                <meta name="author" content="QRPay" />
+                <meta name="author" content="QRPay Indonesia" />
                 <meta name="robots" content="index, follow" />
+
+                <meta property="og:title" content="QRPay - Sistem Pembayaran & Pemesanan Tiket Digital #1 di Indonesia" />
+                <meta
+                    property="og:description"
+                    content="Platform pembayaran & pemesanan tiket digital terpercaya. Pesan tiket transportasi & bayar tagihan dengan mudah. Transaksi aman & cepat."
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:image" content="/logo.png" />
+                <meta property="og:url" content="https://qrpay.co.id" />
+                <meta property="og:site_name" content="QRPay Indonesia" />
+
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="QRPay - Sistem Pembayaran & Pemesanan Tiket Digital Terpercaya" />
+                <meta
+                    name="twitter:description"
+                    content="Platform pembayaran & pemesanan tiket digital terpercaya. Transaksi aman & cepat dengan QRPay."
+                />
+                <meta name="twitter:image" content="/logo.png" />
+
+                <meta name="language" content="id-ID" />
+                <meta name="geo.region" content="ID" />
+                <meta name="geo.placename" content="Indonesia" />
+                <link rel="canonical" href="https://qrpay.co.id" />
+                <meta name="theme-color" content="#EF018F" />
             </Head>
             <motion.section
                 initial={{ opacity: 0 }}

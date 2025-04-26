@@ -1,10 +1,7 @@
-import { gsap } from 'gsap';
-import { Observer } from 'gsap/Observer';
-import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { useEffect, useRef, useState } from 'react';
 
-gsap.registerPlugin(Observer);
-
-export default function InfiniteScroll({
+const InfiniteScroll = ({
     width = '100%',
     maxHeight = '100%',
     negativeMargin = '-2.5em',
@@ -16,9 +13,19 @@ export default function InfiniteScroll({
     autoplaySpeed = 0.5,
     autoplayDirection = 'down',
     pauseOnHover = false,
-}) {
+}) => {
     const wrapperRef = useRef(null);
     const containerRef = useRef(null);
+
+    const [windowWidth, setWindowWidth] = useState(0);
+
+    // Handle window width on client-side only
+    useEffect(() => {
+        setWindowWidth(window.innerWidth);
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const getTiltTransform = () => {
         if (!isTilted) return 'none';
@@ -26,80 +33,83 @@ export default function InfiniteScroll({
     };
 
     useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-        if (items.length === 0) return;
-
-        const divItems = gsap.utils.toArray(container.children);
-        if (!divItems.length) return;
-
-        const firstItem = divItems[0];
-        const itemStyle = getComputedStyle(firstItem);
-        const itemHeight = firstItem.offsetHeight;
-        const itemMarginTop = parseFloat(itemStyle.marginTop) || 0;
-        const totalItemHeight = itemHeight + itemMarginTop;
-        const totalHeight = itemHeight * items.length + itemMarginTop * (items.length - 1);
-
-        const wrapFn = gsap.utils.wrap(-totalHeight, totalHeight);
-
-        divItems.forEach((child, i) => {
-            const y = i * totalItemHeight;
-            gsap.set(child, { y });
-        });
-
-        const observer = Observer.create({
-            target: container,
-            type: 'wheel,touch,pointer',
-            preventDefault: true,
-            onPress: ({ target }) => {
-                target.style.cursor = 'grabbing';
-            },
-            onRelease: ({ target }) => {
-                target.style.cursor = 'grab';
-            },
-            onChange: ({ deltaY, isDragging, event }) => {
-                const d = event.type === 'wheel' ? -deltaY : deltaY;
-                const distance = isDragging ? d * 5 : d * 10;
-                divItems.forEach((child) => {
-                    gsap.to(child, {
-                        duration: 0.5,
-                        ease: 'expo.out',
-                        y: `+=${distance}`,
-                        modifiers: {
-                            y: gsap.utils.unitize(wrapFn),
-                        },
-                    });
-                });
-            },
-        });
-
+        let observer;
         let rafId;
-        if (autoplay) {
-            const directionFactor = autoplayDirection === 'down' ? 1 : -1;
-            const speedPerFrame = autoplaySpeed * directionFactor;
 
-            const tick = () => {
-                divItems.forEach((child) => {
-                    gsap.set(child, {
-                        y: `+=${speedPerFrame}`,
-                        modifiers: {
-                            y: gsap.utils.unitize(wrapFn),
-                        },
-                    });
+        if (typeof window !== 'undefined') {
+            import('gsap/Observer').then((module) => {
+                const Observer = module.default;
+                gsap.registerPlugin(Observer);
+
+                const container = containerRef.current;
+                if (!container || items.length === 0) return;
+
+                const divItems = gsap.utils.toArray(container.children);
+                if (!divItems.length) return;
+
+                const firstItem = divItems[0];
+                const itemStyle = getComputedStyle(firstItem);
+                const itemHeight = firstItem.offsetHeight;
+                const itemMarginTop = parseFloat(itemStyle.marginTop) || 0;
+                const totalItemHeight = itemHeight + itemMarginTop;
+                const totalHeight = itemHeight * items.length + itemMarginTop * (items.length - 1);
+
+                const wrapFn = gsap.utils.wrap(-totalHeight, totalHeight);
+
+                divItems.forEach((child, i) => {
+                    const y = i * totalItemHeight;
+                    gsap.set(child, { y });
                 });
-                rafId = requestAnimationFrame(tick);
-            };
 
-            rafId = requestAnimationFrame(tick);
+                observer = Observer.create({
+                    target: container,
+                    type: 'wheel,touch,pointer',
+                    preventDefault: true,
+                    onPress: ({ target }) => {
+                        target.style.cursor = 'grabbing';
+                    },
+                    onRelease: ({ target }) => {
+                        target.style.cursor = 'grab';
+                    },
+                    onChange: ({ deltaY, isDragging, event }) => {
+                        const d = event.type === 'wheel' ? -deltaY : deltaY;
+                        const distance = isDragging ? d * 5 : d * 10;
+                        divItems.forEach((child) => {
+                            gsap.to(child, {
+                                duration: 0.5,
+                                ease: 'expo.out',
+                                y: `+=${distance}`,
+                                modifiers: {
+                                    y: gsap.utils.unitize(wrapFn),
+                                },
+                            });
+                        });
+                    },
+                });
 
-            return () => {
-                observer.kill();
-                rafId && cancelAnimationFrame(rafId);
-            };
+                if (autoplay) {
+                    const directionFactor = autoplayDirection === 'down' ? 1 : -1;
+                    const speedPerFrame = autoplaySpeed * directionFactor;
+
+                    const tick = () => {
+                        divItems.forEach((child) => {
+                            gsap.set(child, {
+                                y: `+=${speedPerFrame}`,
+                                modifiers: {
+                                    y: gsap.utils.unitize(wrapFn),
+                                },
+                            });
+                        });
+                        rafId = requestAnimationFrame(tick);
+                    };
+
+                    rafId = requestAnimationFrame(tick);
+                }
+            });
         }
 
         return () => {
-            observer.kill();
+            if (observer) observer.kill();
             if (rafId) cancelAnimationFrame(rafId);
         };
     }, [items, autoplay, autoplaySpeed, autoplayDirection, pauseOnHover, isTilted, tiltDirection, negativeMargin]);
@@ -130,7 +140,7 @@ export default function InfiniteScroll({
                         className="relative box-border flex items-center justify-center overflow-hidden rounded-[15px] select-none"
                         key={i}
                         style={{
-                            height: `${itemMinHeight * (window.innerWidth < 640 ? 0.7 : window.innerWidth < 768 ? 0.8 : 0.9)}px`,
+                            height: `${itemMinHeight * (windowWidth < 640 ? 0.7 : windowWidth < 768 ? 0.8 : 0.9)}px`,
                             marginTop: negativeMargin,
                         }}
                     >
@@ -140,4 +150,6 @@ export default function InfiniteScroll({
             </div>
         </div>
     );
-}
+};
+
+export default InfiniteScroll;
