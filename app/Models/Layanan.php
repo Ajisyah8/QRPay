@@ -18,6 +18,7 @@ class Layanan extends Model
         'judul',
         'deskripsi',
         'gambar',
+        'link',
     ];
 
     protected $dates = ['deleted_at'];

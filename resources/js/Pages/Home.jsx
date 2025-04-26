@@ -478,11 +478,7 @@ const Home = () => {
                                 key={index}
                                 className="overflow-hidden rounded-lg bg-white shadow-md transition duration-300 hover:scale-105 hover:shadow-lg sm:rounded-xl"
                             >
-                                <a
-                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20tertarik%20dengan%20${encodeURIComponent(item.judul)}`}
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
+                                <a href={item.link} rel="noopener noreferrer" target="_blank">
                                     <img
                                         src={`/storage/${item.gambar ?? 'default-layanan.jpg'}`}
                                         alt={item.judul}

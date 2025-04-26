@@ -50,6 +50,9 @@ class LayananResource extends Resource
                     ->imagePreviewHeight('150')
                     ->maxSize(1024)
                     ->required(),
+                Forms\Components\TextInput::make('link')
+
+                    ->maxLength(255),
             ]);
     }
 
@@ -65,6 +68,8 @@ class LayananResource extends Resource
                 Tables\Columns\ImageColumn::make('gambar')
                     ->disk('public')
                     ->height(60),
+                Tables\Columns\TextColumn::make('link')
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()

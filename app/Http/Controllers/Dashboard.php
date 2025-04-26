@@ -27,4 +27,32 @@ class Dashboard extends Controller
             'promos' => Promo::where('status', 'on')->latest()->get(),
         ]);
     }
+
+    // RESTful API Endpoints
+    public function apiHeroes()
+    {
+        return response()->json(Hero::orderBy('id', 'asc')->get());
+    }
+
+    public function apiLayanans()
+    {
+        return response()->json(Layanan::orderBy('id', 'asc')->get());
+    }
+
+    public function apiLiburans()
+    {
+        return response()->json(Liburan::with('user')->latest()->get());
+    }
+
+    public function apiPromos()
+    {
+        $promos = Promo::where('status', 'on')->latest()->get();
+
+        // Menambahkan URL lengkap untuk setiap gambar
+        foreach ($promos as $promo) {
+            $promo->gambar = asset('storage/' . $promo->gambar);
+        }
+
+        return response()->json($promos);
+    }
 }
