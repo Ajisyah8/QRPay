@@ -12,20 +12,24 @@ import InfiniteScroll from '../components/Quote';
 import Tugu from './assets/TuguSirih.png';
 import Wave from './assets/Vector 1.png';
 import BPJS from './layanan/BPJS.png';
-// import Bus from './layanan/Bus.png';
+
 import DompetDigital from './layanan/DompetDigital.png';
-// import Hotel from './layanan/Hotel.png';
-// import Kapal from './layanan/Kapal laut.png';
-// import Kereta from './layanan/Kereta api.png';
+
 import PLN from './layanan/ListrikPLN.png';
 import PBB from './layanan/PBB.png';
 import PDAM from './layanan/PDAM.png';
-// import Pesawat from './layanan/Pesawat.png';
+
 import Pulsa from './layanan/Pulsa.png';
 import ShuttleBus from './layanan/ShuttleBus.png';
-// import Ticket from './layanan/Ticket.png';
+
+import Dana from './e-wallet/Dana.png';
+import Gopay from './e-wallet/Gopay.png';
+import LinkAja from './e-wallet/LinkAja.png';
+import OVO from './e-wallet/OVO.png';
+import ShopeePay from './e-wallet/Shopeepay.png';
 import TVKabel from './layanan/TV.png';
 import VoucherGames from './layanan/Voucher.png';
+import AirAsia from './partner/airasia.png';
 import BatikAir from './partner/batik air.png';
 import Citilink from './partner/citilink.png';
 import GarudaIndo from './partner/garuda indonesia.png';
@@ -36,23 +40,9 @@ import PelitaAir from './partner/Pelita_air.png';
 import Pelni from './partner/Pelni.png';
 import Sriwijaya from './partner/Sriwijaya Air.png';
 import SuperAir from './partner/Super Air Jet.png';
+import Transnusa from './partner/transnusa.png';
 import Trigana from './partner/Trigana Air.png';
 import Wings from './partner/wingsair.png';
-// import Promo1 from './promo/Promo1.jpeg';
-// import Promo2 from './promo/Promo2.jpeg';
-// import Promo3 from './promo/Promo3.jpeg';
-// import Promo4 from './promo/Promo4.jpeg';
-// import Promo5 from './promo/Promo5.jpeg';
-// import Promo6 from './promo/Promo6.jpeg';
-// import Promo7 from './promo/Promo7.jpeg';
-// import Promo8 from './promo/Promo8.jpeg';
-// import Bali from './wisata/bali.jpg';
-// import Candi from './wisata/candi.jpg';
-// import Komodo from './wisata/komodo.jpg';
-// import RajaAmpat from './wisata/rajaAmpat.jpg';
-// import Wakatobi from './wisata/wakatobi.jpg';
-import AirAsia from './partner/airasia.png';
-import Transnusa from './partner/transnusa.png';
 import Bagan from './world/Bagan.jpg';
 import Borobudur from './world/borobudur.jpg';
 import Celcus from './world/Celcus.jpg';
@@ -84,15 +74,60 @@ const items = [
 ];
 
 const layananItems = [
-    { image: ShuttleBus, label: 'Shuttle Bus' },
-    { image: Pulsa, label: 'Pulsa' },
-    { image: PLN, label: 'Listrik PLN' },
-    { image: DompetDigital, label: 'Dompet Digital' },
-    { image: VoucherGames, label: 'Voucher Games' },
-    { image: BPJS, label: 'BPJS' },
-    { image: PDAM, label: 'PDAM' },
-    { image: TVKabel, label: 'TV Kabel' },
-    { image: PBB, label: 'PBB' },
+    {
+        image: ShuttleBus,
+        label: 'Shuttle Bus',
+        type: 'transportation',
+        inputFields: ['rute', 'tanggal', 'jumlah_penumpang'],
+    },
+    {
+        image: Pulsa,
+        label: 'Pulsa',
+        type: 'pulsa',
+        inputFields: ['nomor_telepon', 'nominal'],
+    },
+    {
+        image: PLN,
+        label: 'Listrik PLN',
+        type: 'pln',
+        inputFields: ['nomor_meteran', 'nominal'],
+    },
+    {
+        image: DompetDigital,
+        label: 'Dompet Digital',
+        type: 'ewallet',
+        inputFields: ['jenis_ewallet', 'nomor_tujuan', 'nominal'],
+    },
+    {
+        image: VoucherGames,
+        label: 'Voucher Games',
+        type: 'games',
+        inputFields: ['game', 'user_id', 'nominal'],
+    },
+    {
+        image: BPJS,
+        label: 'BPJS',
+        type: 'bpjs',
+        inputFields: ['nomor_bpjs', 'periode'],
+    },
+    {
+        image: PDAM,
+        label: 'PDAM',
+        type: 'pdam',
+        inputFields: ['nomor_pelanggan'],
+    },
+    {
+        image: TVKabel,
+        label: 'TV Kabel',
+        type: 'tv',
+        inputFields: ['nomor_pelanggan', 'paket'],
+    },
+    {
+        image: PBB,
+        label: 'PBB',
+        type: 'pbb',
+        inputFields: ['nomor_objek_pajak', 'tahun'],
+    },
 ];
 
 const checkInLogos = [
@@ -110,6 +145,72 @@ const Home = () => {
     const [showAllHeroes, setShowAllHeroes] = useState(false);
     const [showAllLayanans, setShowAllLayanans] = useState(false);
     const [activeFilter, setActiveFilter] = useState('layanan');
+    const [showPPOBModal, setShowPPOBModal] = useState(false);
+    const [selectedService, setSelectedService] = useState({
+        image: Pulsa,
+        label: 'Pulsa',
+        type: 'pulsa',
+        inputFields: ['nomor_telepon', 'nominal'],
+    });
+    const [selectedNominal, setSelectedNominal] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [selectedOperator, setSelectedOperator] = useState(null);
+    const [selectedJenisPLN, setSelectedJenisPLN] = useState('');
+    const [meterNumber, setMeterNumber] = useState('');
+    const [selectedWallet, setSelectedWallet] = useState(null);
+
+    const handlePhoneNumberChange = (e) => {
+        const number = e.target.value;
+        setPhoneNumber(number);
+
+        const prefix = number.substring(0, 4);
+        const operator = operators.find((op) => op.prefix.includes(prefix));
+        setSelectedOperator(operator);
+    };
+
+    const pulsaOptions = [
+        { nominal: 5000, harga: 5000, promo: true },
+        { nominal: 10000, harga: 10000 },
+        { nominal: 15000, harga: 15000 },
+        { nominal: 20000, harga: 20500 },
+        { nominal: 25000, harga: 25000 },
+        { nominal: 30000, harga: 30000 },
+        { nominal: 35000, harga: 36500 },
+        { nominal: 40000, harga: 40000 },
+        { nominal: 45000, harga: 45500 },
+        { nominal: 50000, harga: 50000, promo: true },
+    ];
+
+    const ewalletOptions = [
+        { id: 'gopay', name: 'GoPay', logo: Gopay },
+        { id: 'ovo', name: 'OVO', logo: OVO },
+        { id: 'dana', name: 'DANA', logo: Dana },
+        { id: 'linkaja', name: 'LinkAja', logo: LinkAja },
+        { id: 'shopeepay', name: 'ShopeePay', logo: ShopeePay },
+    ];
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (selectedService.label === 'Shuttle Bus') {
+            window.open(
+                `https://wa.me/6282288334648?text=Halo, saya ingin memesan Shuttle Bus%0A%0ADetail Pemesanan:%0A${selectedService.inputFields.map((field) => `${field.replace(/_/g, ' ')}: [isi ${field}]`).join('%0A')}`,
+                '_blank',
+            );
+            return;
+        }
+    };
+
+    const handleServiceClick = (service) => {
+        if (service.label === 'Shuttle Bus') {
+            window.open(
+                `https://wa.me/6282288334648?text=Halo, saya ingin memesan Shuttle Bus%0A%0ADetail Pemesanan:%0A${service.inputFields.map((field) => `${field.replace(/_/g, ' ')}: [isi ${field}]`).join('%0A')}`,
+                '_blank',
+            );
+            return;
+        }
+        setSelectedService(service);
+        setShowPPOBModal(true);
+    };
 
     const displayedHeroes = showAllHeroes ? heroes : heroes.slice(0, 6);
     const displayedLayanans = showAllLayanans ? layanans : layanans.slice(0, 9);
@@ -124,7 +225,7 @@ const Home = () => {
         <>
             <AdModal promos={promos} />
             <Head>
-                <title>QRPay - Sistem Pembayaran & Pemesanan Tiket Digital #1 di Indonesia</title>
+                <title>QRPay - Sistem Pembayaran & Pemesanan Tiket Digital di Indonesia</title>
                 <meta charSet="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta
@@ -404,7 +505,6 @@ const Home = () => {
                     className="h-full w-full"
                 />
             </section>
-
             <section className="font-['DM Sans'] bg-gradient-to-b from-[#CCE0FD] via-[#99B3DE] to-[#7DA8E8] px-4 py-12 pt-30 sm:py-16 md:py-20 lg:py-2 lg:pt-25">
                 <div className="mb-6 text-center sm:mb-8">
                     <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Rekomendasi Tempat Wisata</h2>
@@ -508,73 +608,274 @@ const Home = () => {
                 )}
             </section>
             <section
-                className="font-['DM Sans'] px-4 py-8 sm:py-12 md:py-16"
-                style={{
-                    background: 'linear-gradient(to bottom, #CCE0FD, #FFFFFF)',
-                }}
+                className="min-h-screen bg-gradient-to-b from-[#CCE0FD] via-[#7DB0E8] to-[#FFFFFF] px-4 py-20 font-['DM_Sans']"
+                id="services-section"
             >
-                <div className="mb-6 text-center sm:mb-8 md:mb-10">
-                    <h2 className="text-xl font-bold text-[#1B1B1F] sm:text-2xl md:text-3xl">Butuh Layanan Lainnya?</h2>
-                    <p className="mt-2 text-sm font-bold text-[#EF2DA2] sm:text-base">Klik ikon di bawah untuk pesan langsung lewat WhatsApp!</p>
+                <div className="mb-10 text-center">
+                    <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
+                    <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
                 </div>
 
-                <div className="mx-auto max-w-5xl">
-                    <div className="sm:hidden">
-                        <div className="grid grid-cols-2 gap-8">
-                            {layananItems.map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center"
-                                >
+                <div className="mx-auto max-w-6xl px-4">
+                    <div className="grid grid-cols-3 gap-6 sm:grid-cols-9 sm:gap-4">
+                        {layananItems.map((item, index) => (
+                            <div key={index} className="flex items-center justify-center">
+                                <button onClick={() => handleServiceClick(item)} className="group flex flex-col items-center justify-center p-3">
                                     <img
                                         src={item.image}
                                         alt={item.label}
-                                        className="h-24 w-24 object-contain transition-transform duration-200 hover:scale-110"
+                                        className="h-16 w-16 cursor-pointer object-contain transition-transform duration-300 group-hover:scale-110 sm:h-20 sm:w-20 md:h-24 md:w-24 lg:h-28 lg:w-28"
                                     />
-                                </a>
-                            ))}
-                        </div>
+                                </button>
+                            </div>
+                        ))}
                     </div>
 
-                    <div className="hidden sm:block">
-                        <div className="grid grid-cols-5 justify-items-center gap-4">
-                            {layananItems.slice(0, 5).map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center"
+                    {selectedService?.type === 'pulsa' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Beli Pulsa</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                                 >
-                                    <img
-                                        src={item.image}
-                                        alt={item.label}
-                                        className="h-28 w-28 object-contain transition-transform duration-200 hover:scale-110 md:h-32 md:w-32 lg:h-40 lg:w-40"
+                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                <div className="relative">
+                                    <input
+                                        type="tel"
+                                        value={phoneNumber}
+                                        onChange={handlePhoneNumberChange}
+                                        placeholder="Contoh: 08123456789"
+                                        className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                        maxLength="13"
                                     />
-                                </a>
-                            ))}
+                                    {phoneNumber && (
+                                        <button
+                                            onClick={() => setPhoneNumber('')}
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        >
+                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                                {selectedOperator && <p className="mt-2 text-sm font-medium text-[#EF018F]">Operator: {selectedOperator.name}</p>}
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Nominal</label>
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                                    {pulsaOptions.map((pulsa, index) => (
+                                        <button
+                                            key={index}
+                                            className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                selectedNominal === pulsa.nominal
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedNominal(pulsa.nominal)}
+                                        >
+                                            <span className="text-sm font-semibold">Rp{pulsa.nominal.toLocaleString()}</span>
+                                            <span className="mt-1 text-xs text-gray-500">Rp{pulsa.harga.toLocaleString()}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!phoneNumber || !selectedNominal}
+                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Beli Pulsa
+                            </button>
                         </div>
-                        <div className="mt-4 flex justify-center gap-12">
-                            {layananItems.slice(5).map((item, index) => (
-                                <a
-                                    key={index}
-                                    href={`https://wa.me/6282288334682?text=Halo%2C%20saya%20ingin%20pesan%20layanan%20${encodeURIComponent(item.label)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center justify-center"
+                    )}
+                    {selectedService?.type === 'pln' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Layanan PLN</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                                 >
-                                    <img
-                                        src={item.image}
-                                        alt={item.label}
-                                        className="h-28 w-28 object-contain transition-transform duration-200 hover:scale-110 md:h-32 md:w-32 lg:h-40 lg:w-40"
+                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Jenis Layanan PLN</label>
+                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                                    {['Token Listrik', 'Tagihan Listrik', 'PLN Non-Taglis'].map((jenis, index) => (
+                                        <button
+                                            key={index}
+                                            className={`relative flex items-center justify-center rounded-lg border p-4 transition-all duration-200 ${
+                                                selectedJenisPLN === jenis
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedJenisPLN(jenis)}
+                                        >
+                                            <span className="text-sm font-semibold">{jenis}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Nomor Meter/ID Pelanggan</label>
+                                <div className="relative">
+                                    <input
+                                        type="text"
+                                        value={meterNumber}
+                                        onChange={(e) => setMeterNumber(e.target.value)}
+                                        placeholder="Contoh: 12345678901"
+                                        className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                        maxLength="12"
                                     />
-                                </a>
-                            ))}
+                                    {meterNumber && (
+                                        <button
+                                            onClick={() => setMeterNumber('')}
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                        >
+                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                            </div>
+
+                            {selectedJenisPLN === 'Token Listrik' && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">Nominal Token</label>
+                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                        {[20000, 50000, 100000, 200000, 500000, 1000000].map((nominal, index) => (
+                                            <button
+                                                key={index}
+                                                className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                    selectedNominal === nominal
+                                                        ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                        : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                                }`}
+                                                onClick={() => setSelectedNominal(nominal)}
+                                            >
+                                                <span className="text-sm font-semibold">Rp{nominal.toLocaleString()}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!meterNumber || (selectedJenisPLN === 'Token Listrik' && !selectedNominal)}
+                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                {selectedJenisPLN === 'Token Listrik' ? 'Beli Token' : 'Cek Tagihan'}
+                            </button>
                         </div>
-                    </div>
+                    )}
+                    {selectedService?.type === 'ewallet' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Top Up E-Wallet</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                                >
+                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Pilih E-Wallet</label>
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                    {ewalletOptions.map((wallet, index) => (
+                                        <button
+                                            key={index}
+                                            className={`relative flex flex-col items-center justify-center rounded-lg border p-4 transition-all duration-200 ${
+                                                selectedWallet === wallet.id
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedWallet(wallet.id)}
+                                        >
+                                            <img src={wallet.logo} alt={wallet.name} className="mb-2 h-8 w-auto" />
+                                            <span className="text-sm font-medium">{wallet.name}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {selectedWallet && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">Nomor Telepon</label>
+                                    <div className="relative">
+                                        <input
+                                            type="tel"
+                                            value={phoneNumber}
+                                            onChange={(e) => setPhoneNumber(e.target.value)}
+                                            placeholder="Contoh: 08123456789"
+                                            className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                            maxLength="13"
+                                        />
+                                        {phoneNumber && (
+                                            <button
+                                                onClick={() => setPhoneNumber('')}
+                                                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            >
+                                                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
+
+                            {selectedWallet && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">Nominal Top Up</label>
+                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                        {[10000, 20000, 50000, 100000, 150000, 200000, 300000, 500000].map((nominal, index) => (
+                                            <button
+                                                key={index}
+                                                className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                    selectedNominal === nominal
+                                                        ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                        : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                                }`}
+                                                onClick={() => setSelectedNominal(nominal)}
+                                            >
+                                                <span className="text-sm font-semibold">Rp{nominal.toLocaleString()}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!selectedWallet || !phoneNumber || !selectedNominal}
+                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Top Up Sekarang
+                            </button>
+                        </div>
+                    )}
                 </div>
             </section>
         </>
