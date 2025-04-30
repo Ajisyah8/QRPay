@@ -19,7 +19,6 @@ const InfiniteScroll = ({
 
     const [windowWidth, setWindowWidth] = useState(0);
 
-    // Handle window width on client-side only
     useEffect(() => {
         setWindowWidth(window.innerWidth);
         const handleResize = () => setWindowWidth(window.innerWidth);

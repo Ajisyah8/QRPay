@@ -18,15 +18,22 @@ import DompetDigital from './layanan/DompetDigital.png';
 import PLN from './layanan/ListrikPLN.png';
 import PBB from './layanan/PBB.png';
 import PDAM from './layanan/PDAM.png';
+import PDAMKepri from './PDAM/PDAM Kepri.png';
 
 import Pulsa from './layanan/Pulsa.png';
 import ShuttleBus from './layanan/ShuttleBus.png';
 
+import Kesehatan from './BPJS/BPJS Kesehatan.png';
+import Ketenagakerjaan from './BPJS/BPJS Ketenagakerjaan.png';
 import Dana from './e-wallet/Dana.png';
 import Gopay from './e-wallet/Gopay.png';
 import LinkAja from './e-wallet/LinkAja.png';
 import OVO from './e-wallet/OVO.png';
 import ShopeePay from './e-wallet/Shopeepay.png';
+import FF from './games/freefire.png';
+import FFMax from './games/freefiremax.png';
+import MLBB from './games/mobilelegend.png';
+import PUBG from './games/pubg.png';
 import TVKabel from './layanan/TV.png';
 import VoucherGames from './layanan/Voucher.png';
 import AirAsia from './partner/airasia.png';
@@ -158,6 +165,25 @@ const Home = () => {
     const [selectedJenisPLN, setSelectedJenisPLN] = useState('');
     const [meterNumber, setMeterNumber] = useState('');
     const [selectedWallet, setSelectedWallet] = useState(null);
+    const [selectedGame, setSelectedGame] = useState(null);
+    const [userId, setUserId] = useState('');
+    const [selectedBPJSType, setSelectedBPJSType] = useState(null);
+    const [bpjsNumber, setBpjsNumber] = useState('');
+    const [selectedPeriod, setSelectedPeriod] = useState(null);
+    const [selectedPDAM, setSelectedPDAM] = useState(null);
+    const [customerId, setCustomerId] = useState('');
+    const [selectedTVProvider, setSelectedTVProvider] = useState(null);
+    const [selectedTVPackage, setSelectedTVPackage] = useState(null);
+    const [tvCustomerId, setTVCustomerId] = useState('');
+
+    const operators = [
+        { name: 'Telkomsel', prefix: ['0811', '0812', '0813', '0821', '0822', '0823', '0851', '0852', '0853'] },
+        { name: 'Indosat', prefix: ['0814', '0815', '0816', '0855', '0856', '0857', '0858'] },
+        { name: 'XL', prefix: ['0817', '0818', '0819', '0859', '0877', '0878'] },
+        { name: 'Axis', prefix: ['0831', '0832', '0833', '0838'] },
+        { name: 'Three', prefix: ['0895', '0896', '0897', '0898', '0899'] },
+        { name: 'Smartfren', prefix: ['0881', '0882', '0883', '0884', '0885', '0886', '0887', '0888', '0889'] },
+    ];
 
     const handlePhoneNumberChange = (e) => {
         const number = e.target.value;
@@ -189,14 +215,29 @@ const Home = () => {
         { id: 'shopeepay', name: 'ShopeePay', logo: ShopeePay },
     ];
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (selectedService.label === 'Shuttle Bus') {
-            window.open(
-                `https://wa.me/6282288334648?text=Halo, saya ingin memesan Shuttle Bus%0A%0ADetail Pemesanan:%0A${selectedService.inputFields.map((field) => `${field.replace(/_/g, ' ')}: [isi ${field}]`).join('%0A')}`,
-                '_blank',
-            );
-            return;
+    const handleSubmit = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/api/v1/beli-pulsa', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    phone: phoneNumber,
+                    nominal: selectedNominal,
+                }),
+            });
+
+            const result = await response.json();
+
+            if (result.invoice_url) {
+                window.location.href = result.invoice_url; // redirect ke halaman pembayaran Xendit
+            } else {
+                alert('Gagal membuat invoice: ' + (result.message || ''));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat menghubungi server.');
         }
     };
 
@@ -613,7 +654,7 @@ const Home = () => {
             >
                 <div className="mb-10 text-center">
                     <h1 className="text-2xl font-bold text-[#1B1B1F] md:text-3xl">Kami Hadirkan Layanan Terbaik Untuk Perjalananmu</h1>
-                    <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan tiket yang kami sediakan dan pilih yang paling pas untukmu</p>
+                    <p className="mt-2 font-bold text-[#EF018F]">Lihat berbagai layanan yang kami sediakan dan pilih yang paling pas untukmu</p>
                 </div>
 
                 <div className="mx-auto max-w-6xl px-4">
@@ -639,9 +680,9 @@ const Home = () => {
                                     onClick={() => setSelectedService(null)}
                                     className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                                 >
-                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    {/* <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    </svg> */}
                                 </button>
                             </div>
 
@@ -676,7 +717,7 @@ const Home = () => {
                                     {pulsaOptions.map((pulsa, index) => (
                                         <button
                                             key={index}
-                                            className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                            className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
                                                 selectedNominal === pulsa.nominal
                                                     ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
                                                     : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
@@ -693,7 +734,7 @@ const Home = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={!phoneNumber || !selectedNominal}
-                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 Beli Pulsa
                             </button>
@@ -707,19 +748,19 @@ const Home = () => {
                                     onClick={() => setSelectedService(null)}
                                     className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                                 >
-                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    {/* <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    </svg> */}
                                 </button>
                             </div>
 
                             <div className="mt-6">
                                 <label className="mb-2 block text-sm font-medium text-gray-700">Jenis Layanan PLN</label>
-                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                                <div className="grid cursor-pointer grid-cols-1 gap-3 sm:grid-cols-3">
                                     {['Token Listrik', 'Tagihan Listrik', 'PLN Non-Taglis'].map((jenis, index) => (
                                         <button
                                             key={index}
-                                            className={`relative flex items-center justify-center rounded-lg border p-4 transition-all duration-200 ${
+                                            className={`relative flex cursor-pointer items-center justify-center rounded-lg border p-4 transition-all duration-200 ${
                                                 selectedJenisPLN === jenis
                                                     ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
                                                     : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
@@ -746,11 +787,11 @@ const Home = () => {
                                     {meterNumber && (
                                         <button
                                             onClick={() => setMeterNumber('')}
-                                            className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            className="absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600"
                                         >
-                                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            {/* <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                            </svg>
+                                            </svg> */}
                                         </button>
                                     )}
                                 </div>
@@ -763,7 +804,7 @@ const Home = () => {
                                         {[20000, 50000, 100000, 200000, 500000, 1000000].map((nominal, index) => (
                                             <button
                                                 key={index}
-                                                className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
                                                     selectedNominal === nominal
                                                         ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
                                                         : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
@@ -780,7 +821,7 @@ const Home = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={!meterNumber || (selectedJenisPLN === 'Token Listrik' && !selectedNominal)}
-                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 {selectedJenisPLN === 'Token Listrik' ? 'Beli Token' : 'Cek Tagihan'}
                             </button>
@@ -794,9 +835,9 @@ const Home = () => {
                                     onClick={() => setSelectedService(null)}
                                     className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                                 >
-                                    <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    {/* <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                    </svg>
+                                    </svg> */}
                                 </button>
                             </div>
 
@@ -806,15 +847,15 @@ const Home = () => {
                                     {ewalletOptions.map((wallet, index) => (
                                         <button
                                             key={index}
-                                            className={`relative flex flex-col items-center justify-center rounded-lg border p-4 transition-all duration-200 ${
+                                            className={`flex cursor-pointer flex-col items-center rounded-lg border p-2 transition-all duration-200 ${
                                                 selectedWallet === wallet.id
-                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
-                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                                    ? 'border border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
                                             }`}
                                             onClick={() => setSelectedWallet(wallet.id)}
                                         >
-                                            <img src={wallet.logo} alt={wallet.name} className="mb-2 h-8 w-auto" />
-                                            <span className="text-sm font-medium">{wallet.name}</span>
+                                            <img src={wallet.logo} alt={wallet.name} className="mb-2 h-20 w-20 object-contain" />
+                                            {/* <span className="text-sm font-medium">{wallet.name}</span> */}
                                         </button>
                                     ))}
                                 </div>
@@ -853,7 +894,7 @@ const Home = () => {
                                         {[10000, 20000, 50000, 100000, 150000, 200000, 300000, 500000].map((nominal, index) => (
                                             <button
                                                 key={index}
-                                                className={`relative flex flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
                                                     selectedNominal === nominal
                                                         ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
                                                         : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
@@ -870,10 +911,471 @@ const Home = () => {
                             <button
                                 onClick={handleSubmit}
                                 disabled={!selectedWallet || !phoneNumber || !selectedNominal}
-                                className="mt-6 w-full rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 Top Up Sekarang
                             </button>
+                        </div>
+                    )}
+                    {selectedService?.type === 'games' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Voucher Games</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                                ></button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Pilih Game</label>
+                                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                                    {[
+                                        { id: 'mlbb', name: 'Mobile Legends', currency: 'Diamond', image: MLBB, popular: true },
+                                        { id: 'pubg', name: 'PUBG Mobile', currency: 'UC', image: PUBG, popular: true },
+                                        { id: 'ff', name: 'Free Fire', currency: 'Diamond', image: FF, popular: true },
+                                        { id: 'ffmax', name: 'FF MAX', currency: 'Diamond', image: FFMax, popular: true },
+                                    ].map((game) => (
+                                        <button
+                                            key={game.id}
+                                            className={`relative flex cursor-pointer flex-col items-center rounded-lg border p-3 transition-all duration-200 ${
+                                                selectedGame === game.id
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedGame(game.id)}
+                                        >
+                                            <img src={game.image} alt={game.name} className="mb-2 h-20 w-20 object-contain" />
+                                            {/* <span className="text-sm font-semibold">{game.name}</span> */}
+                                            {game.popular && (
+                                                <span className="mt-1 rounded-full bg-[#EF018F]/10 px-2 py-0.5 text-xs text-[#EF018F]">Populer</span>
+                                            )}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {selectedGame && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">User ID</label>
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            value={userId}
+                                            onChange={(e) => setUserId(e.target.value)}
+                                            placeholder="Masukkan User ID"
+                                            className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                        />
+                                        {userId && (
+                                            <button
+                                                onClick={() => setUserId('')}
+                                                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            >
+                                                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+                                    <p className="mt-2 text-xs text-gray-500">
+                                        {selectedGame === 'mlbb' && 'Contoh: 12345678 (1234)'}
+                                        {selectedGame === 'pubg' && 'Contoh: 515151515'}
+                                        {(selectedGame === 'ff' || selectedGame === 'ffmax') && 'Contoh: 12345678'}
+                                    </p>
+                                </div>
+                            )}
+
+                            {selectedGame && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">
+                                        Nominal {selectedGame === 'pubg' ? 'UC' : 'Diamond'}
+                                    </label>
+                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                        {(selectedGame === 'pubg'
+                                            ? [
+                                                  { nominal: 60, harga: 15000, promo: true },
+                                                  { nominal: 120, harga: 29000 },
+                                                  { nominal: 240, harga: 57000 },
+                                                  { nominal: 600, harga: 140000 },
+                                                  { nominal: 1200, harga: 275000 },
+                                                  { nominal: 1800, harga: 410000, populer: true },
+                                              ]
+                                            : [
+                                                  { nominal: 50, harga: 12000, promo: true },
+                                                  { nominal: 100, harga: 24000 },
+                                                  { nominal: 200, harga: 45000 },
+                                                  { nominal: 500, harga: 110000 },
+                                                  { nominal: 1000, harga: 220000 },
+                                                  { nominal: 2000, harga: 435000, populer: true },
+                                              ]
+                                        ).map((item, index) => (
+                                            <button
+                                                key={index}
+                                                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                    selectedNominal === item.nominal
+                                                        ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                        : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                                }`}
+                                                onClick={() => setSelectedNominal(item.nominal)}
+                                            >
+                                                <span className="text-sm font-semibold">
+                                                    {item.nominal} {selectedGame === 'pubg' ? '🎮' : '💎'}
+                                                </span>
+                                                <span className="mt-1 text-xs text-gray-500">Rp{item.harga.toLocaleString()}</span>
+                                                {item.promo && (
+                                                    <span className="absolute -top-2 -right-2 rounded-full bg-red-500 px-2 py-0.5 text-xs text-white">
+                                                        Promo!
+                                                    </span>
+                                                )}
+                                                {item.populer && (
+                                                    <span className="absolute -top-2 -right-2 rounded-full bg-[#EF018F] px-2 py-0.5 text-xs text-white">
+                                                        Populer!
+                                                    </span>
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!selectedGame || !userId || !selectedNominal}
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Beli {selectedGame === 'pubg' ? 'UC' : 'Diamond'}
+                            </button>
+                        </div>
+                    )}
+                    {selectedService?.type === 'bpjs' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Pembayaran BPJS</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                                ></button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Jenis BPJS</label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    {[
+                                        { id: 'kesehatan', name: 'BPJS Kesehatan', image: Kesehatan },
+                                        { id: 'ketenagakerjaan', name: 'BPJS Ketenagakerjaan', image: Ketenagakerjaan },
+                                    ].map((type) => (
+                                        <button
+                                            key={type.id}
+                                            className={`relative flex cursor-pointer flex-col items-center rounded-lg border p-4 transition-all duration-200 ${
+                                                selectedBPJSType === type.id
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedBPJSType(type.id)}
+                                        >
+                                            <img src={type.image} alt={type.name} className="mb-3 h-20 w-auto object-contain" />
+                                            <span className="text-sm font-semibold">{type.name}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {selectedBPJSType && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">Nomor BPJS</label>
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            value={bpjsNumber}
+                                            onChange={(e) => setBpjsNumber(e.target.value)}
+                                            placeholder={`Masukkan Nomor BPJS ${selectedBPJSType === 'kesehatan' ? 'Kesehatan' : 'Ketenagakerjaan'}`}
+                                            className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                        />
+                                        {bpjsNumber && (
+                                            <button
+                                                onClick={() => setBpjsNumber('')}
+                                                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            >
+                                                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+                                    <p className="mt-2 text-xs text-gray-500">Contoh: 0001234567890</p>
+                                </div>
+                            )}
+
+                            {selectedBPJSType && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">Periode Pembayaran</label>
+                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                                        {[1, 2, 3, 6, 12].map((bulan) => (
+                                            <button
+                                                key={bulan}
+                                                className={`relative flex cursor-pointer flex-col items-center justify-center rounded-lg border p-3 transition-all duration-200 ${
+                                                    selectedPeriod === bulan
+                                                        ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                        : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                                }`}
+                                                onClick={() => setSelectedPeriod(bulan)}
+                                            >
+                                                <span className="text-sm font-semibold">{bulan} Bulan</span>
+                                                <span className="mt-1 text-xs">
+                                                    {selectedBPJSType === 'kesehatan'
+                                                        ? `Rp${(bulan * 42000).toLocaleString()}`
+                                                        : `Rp${(bulan * 46000).toLocaleString()}`}
+                                                </span>
+                                                {bulan === 12 && (
+                                                    <span className="absolute -top-2 -right-2 rounded-full bg-[#EF018F] px-2 py-0.5 text-xs text-white">
+                                                        Hemat!
+                                                    </span>
+                                                )}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!selectedBPJSType || !bpjsNumber || !selectedPeriod}
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Bayar BPJS
+                            </button>
+                        </div>
+                    )}
+                    {selectedService?.type === 'pdam' && (
+                        <div className="mt-8 rounded-xl bg-white/80 p-6 shadow-lg backdrop-blur-sm">
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold text-gray-800">Pembayaran PDAM</h2>
+                                <button
+                                    onClick={() => setSelectedService(null)}
+                                    className="rounded-full p-1 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
+                                ></button>
+                            </div>
+
+                            <div className="mt-6">
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Pilih Wilayah PDAM</label>
+                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                                    {[
+                                        { id: 'tanjungpinang', name: 'PDAM Tirta Kepri Tanjungpinang', biayaAdmin: 2500 },
+                                        { id: 'batam', name: 'PDAM Batam', biayaAdmin: 2500 },
+                                        { id: 'lingga', name: 'PDAM Perumda Tirta Lingga', biayaAdmin: 2500 },
+                                    ].map((pdam) => (
+                                        <button
+                                            key={pdam.id}
+                                            className={`relative flex cursor-pointer flex-col items-center rounded-lg border p-4 transition-all duration-200 ${
+                                                selectedPDAM === pdam.id
+                                                    ? 'border-[#EF018F] bg-pink-50 text-[#EF018F]'
+                                                    : 'border-gray-200 hover:border-[#EF018F] hover:bg-pink-50'
+                                            }`}
+                                            onClick={() => setSelectedPDAM(pdam.id)}
+                                        >
+                                            <img src={PDAMKepri} alt={pdam.name} className="mb-3 h-30 w-30 object-contain" />
+                                            <span className="text-center text-sm font-semibold">{pdam.name}</span>
+                                            <span className="mt-2 text-xs text-gray-500">Biaya Admin: Rp{pdam.biayaAdmin.toLocaleString()}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            {selectedPDAM && (
+                                <div className="mt-6">
+                                    <label className="mb-2 block text-sm font-medium text-gray-700">ID Pelanggan</label>
+                                    <div className="relative">
+                                        <input
+                                            type="text"
+                                            value={customerId}
+                                            onChange={(e) => setCustomerId(e.target.value)}
+                                            placeholder="Masukkan ID Pelanggan PDAM"
+                                            className="w-full rounded-lg border border-gray-300 p-3 pr-10 text-gray-700 focus:border-[#EF018F] focus:ring-1 focus:ring-[#EF018F] focus:outline-none"
+                                        />
+                                        {customerId && (
+                                            <button
+                                                onClick={() => setCustomerId('')}
+                                                className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                                            >
+                                                <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                                                </svg>
+                                            </button>
+                                        )}
+                                    </div>
+                                    <p className="mt-2 text-xs text-gray-500">Contoh: 123456789</p>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={handleSubmit}
+                                disabled={!selectedPDAM || !customerId}
+                                className="mt-6 w-full cursor-pointer rounded-lg bg-[#EF018F] px-4 py-3 font-semibold text-white transition-all duration-200 hover:bg-[#D6017F] disabled:cursor-not-allowed disabled:opacity-50"
+                            >
+                                Cek Tagihan
+                            </button>
+
+                            <div className="mt-6 rounded-lg bg-blue-50 p-4">
+                                <h3 className="text-sm font-semibold text-blue-800">Informasi Penting:</h3>
+                                <ul className="mt-2 list-inside list-disc text-xs text-blue-700">
+                                    <li>Pastikan ID Pelanggan yang dimasukkan sudah benar</li>
+                                    <li>Biaya admin akan ditambahkan pada total tagihan</li>
+                                    <li>Pembayaran yang sudah diproses tidak dapat dibatalkan</li>
+                                </ul>
+                            </div>
+                        </div>
+                    )}
+                    {selectedService?.type === 'tv' && (
+                        <div className="space-y-4 rounded-lg bg-white p-6 shadow-sm">
+                            <div>
+                                <label className="mb-2 block text-sm font-medium text-gray-700">Pilih Provider TV Kabel</label>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <button
+                                        onClick={() => setSelectedTVProvider('k-vision')}
+                                        className={`flex items-center justify-center rounded-lg p-4 ${
+                                            selectedTVProvider === 'k-vision'
+                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                : 'border border-gray-200 bg-white'
+                                        }`}
+                                    >
+                                        <span className="text-sm font-medium">K-Vision</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setSelectedTVProvider('tanaka-hd')}
+                                        className={`flex items-center justify-center rounded-lg p-4 ${
+                                            selectedTVProvider === 'tanaka-hd'
+                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                : 'border border-gray-200 bg-white'
+                                        }`}
+                                    >
+                                        <span className="text-sm font-medium">Tanaka HD</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {selectedTVProvider && (
+                                <>
+                                    <div>
+                                        <label className="mb-2 block text-sm font-medium text-gray-700">Nomor Pelanggan</label>
+                                        <input
+                                            type="text"
+                                            value={tvCustomerId}
+                                            onChange={(e) => setTVCustomerId(e.target.value)}
+                                            className="w-full rounded-lg border border-gray-300 p-2"
+                                            placeholder="Masukkan nomor pelanggan"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <label className="mb-2 block text-sm font-medium text-gray-700">Pilih Paket</label>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            {selectedTVProvider === 'k-vision' ? (
+                                                <>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('bronze')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'bronze'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Bronze</span>
+                                                        <span className="text-xs text-gray-500">Rp 99.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('silver')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'silver'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Silver</span>
+                                                        <span className="text-xs text-gray-500">Rp 149.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('gold')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'gold'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Gold</span>
+                                                        <span className="text-xs text-gray-500">Rp 199.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('platinum')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'platinum'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Platinum</span>
+                                                        <span className="text-xs text-gray-500">Rp 299.000</span>
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('basic')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'basic'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Basic</span>
+                                                        <span className="text-xs text-gray-500">Rp 89.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('family')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'family'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Family</span>
+                                                        <span className="text-xs text-gray-500">Rp 129.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('premium')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'premium'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Premium</span>
+                                                        <span className="text-xs text-gray-500">Rp 179.000</span>
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setSelectedTVPackage('ultimate')}
+                                                        className={`flex flex-col items-center justify-center rounded-lg p-4 ${
+                                                            selectedTVPackage === 'ultimate'
+                                                                ? 'border-2 border-[#EF018F] bg-pink-100'
+                                                                : 'border border-gray-200 bg-white'
+                                                        }`}
+                                                    >
+                                                        <span className="text-sm font-medium">Ultimate</span>
+                                                        <span className="text-xs text-gray-500">Rp 249.000</span>
+                                                    </button>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick=""
+                                        disabled={!tvCustomerId || !selectedTVPackage}
+                                        className="w-full rounded-lg bg-[#EF018F] px-4 py-2 text-white disabled:opacity-50"
+                                    >
+                                        Bayar Sekarang
+                                    </button>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>
