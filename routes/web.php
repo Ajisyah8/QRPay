@@ -11,3 +11,6 @@ Route::get('/Kemitraan', function () {
 Route::get('/form-registrasi-agen', function () {
     return Inertia::render('FormRegistrasiAgen');
 });
+Route::get('/terms', function () {
+    return Inertia::render('Terms');
+});

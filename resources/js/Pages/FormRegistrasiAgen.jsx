@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 const FormRegistrasiAgen = () => {
     const [provinces, setProvinces] = useState([]);
+    const [showDetail, setShowDetail] = useState(false);
     const [form, setForm] = useState({
         jenis: 'Basic',
         username: '',
@@ -109,13 +110,30 @@ const FormRegistrasiAgen = () => {
                             <p className="text-lg sm:text-xl font-semibold text-black text-center mb-4 italic">Rp 1.000.000</p>
                             <div className="border-b border-black mb-4"></div>
                             <ul className="space-y-3 text-black text-left text-sm sm:text-base">
-                                <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>1 User ID Login</span></li>
-                                <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Tanpa biaya bulanan</span></li>
-                                <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Komisi 100% NTA</span></li>
-                                <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Bisa upgrade keanggotaan</span></li>
+                                {showDetail ? (
+                                    <>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Setiap agen akan mendapatkan 1 User ID Login yang dapat digunakan untuk mengakses seluruh fitur QRPay.</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Tidak ada biaya bulanan, cukup bayar sekali untuk menjadi agen QRPay.</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Komisi 100% NTA diberikan untuk setiap transaksi yang berhasil dilakukan melalui akun agen.</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Agen dapat melakukan upgrade keanggotaan untuk mendapatkan fitur tambahan di masa mendatang.</span></li>
+                                    </>
+                                ) : (
+                                    <>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>1 User ID Login</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Tanpa biaya bulanan</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Komisi 100% NTA</span></li>
+                                        <li className="flex items-start"><span className="text-black mr-2 mt-1">-</span> <span>Bisa upgrade keanggotaan</span></li>
+                                    </>
+                                )}
                             </ul>
                         </div>
-                        <button className="mt-8 w-full rounded bg-[#EF018F] px-4 py-2 font-semibold text-white hover:bg-pink-600 transition cursor-pointer">Lihat Rincian</button>
+                        <button
+                            className="mt-8 w-full rounded bg-[#EF018F] px-4 py-2 font-semibold text-white hover:bg-pink-600 transition cursor-pointer"
+                            onClick={() => setShowDetail((prev) => !prev)}
+                            type="button"
+                        >
+                            {showDetail ? 'Sembunyikan Rincian' : 'Lihat Rincian'}
+                        </button>
                     </div>
                     <form className="col-span-2 rounded-lg bg-white p-4 sm:p-6" onSubmit={handleSubmit}>
                         <div className="flex flex-wrap -mx-2 mb-4">
@@ -171,7 +189,7 @@ const FormRegistrasiAgen = () => {
                             <input type="checkbox" name="setuju" checked={form.setuju} onChange={handleChange} className="mr-2" />
                             <span className="text-xs sm:text-sm">
                                 Dengan menekan tombol berikut, Anda setuju dengan{' '}
-                                <a href="https://qrpay.co.id/terms" className="text-[#EF018F] underline" target="_blank" rel="noopener noreferrer">Syarat Ketentuan</a>{' '}
+                                <a href="/terms" className="text-[#EF018F] underline" target="_blank" rel="noopener noreferrer">Syarat Ketentuan</a>{' '}
                                 yang berlaku di qrpay.co.id
                             </span>
                         </div>
