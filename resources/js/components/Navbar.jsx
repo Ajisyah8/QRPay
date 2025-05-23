@@ -31,10 +31,10 @@ const Navbar = () => {
                     </a>
                 </div>
 
-                <button 
-                    className="p-2 text-black lg:hidden" 
+                <button
+                    className="p-2 text-black lg:hidden"
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                    aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
                     aria-expanded={isMenuOpen}
                 >
                     <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,14 +48,14 @@ const Navbar = () => {
 
                 {/* Desktop Menu */}
                 <ul className="hidden space-x-6 font-medium text-black lg:flex xl:space-x-10">
-                    {['Home', 'QRPay Store', 'Booking Tiket', 'Cek Pemesanan'].map((item, index) => (
+                    {['Home', 'Kemitraan', 'Booking Tiket', 'Cek Pemesanan'].map((item, index) => (
                         <li key={index} className="group relative">
                             <a
                                 href={
                                     index === 0
                                         ? '/'
                                         : index === 1
-                                          ? 'https://store.qrpay.co.id/'
+                                          ? '/Kemitraan'
                                           : index === 2
                                             ? 'https://velotiket.com/velosiqrpay'
                                             : 'https://velotiket.com/velosiqrpay/cek-pemesanan'
@@ -72,26 +72,22 @@ const Navbar = () => {
                 <div
                     className={`fixed inset-0 z-50 transform bg-white transition-transform duration-300 ease-in-out lg:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
                 >
-                     <div className="flex justify-end p-4">
-                        <button 
-                            onClick={() => setIsMenuOpen(false)} 
-                            className="p-2 text-black"
-                            aria-label="Close navigation menu"
-                        >
+                    <div className="flex justify-end p-4">
+                        <button onClick={() => setIsMenuOpen(false)} className="p-2 text-black" aria-label="Close navigation menu">
                             <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
                     <ul className="flex flex-col items-center space-y-6 pt-10">
-                        {['Home', 'QRPay Store', 'Booking Tiket', 'Cek Pemesanan'].map((item, index) => (
+                        {['Home', 'Kemitraan', 'Booking Tiket', 'Cek Pemesanan'].map((item, index) => (
                             <li key={index} className="w-full text-center">
                                 <a
                                     href={
                                         index === 0
                                             ? '/'
                                             : index === 1
-                                              ? 'https://store.qrpay.co.id/'
+                                              ? '/Kemitraan'
                                               : index === 2
                                                 ? 'https://velotiket.com/velosiqrpay'
                                                 : 'https://velotiket.com/velosiqrpay/cek-pemesanan'
@@ -104,7 +100,7 @@ const Navbar = () => {
                             </li>
                         ))}
                         <li className="w-full px-4 pt-4">
-                        <a
+                            <a
                                 href="https://wa.me/6282288334682?text=Halo%20QRPay%2C%20saya%20tertarik%20untuk%20bekerjasama%20dengan%20QRPay.%20Boleh%20info%20lebih%20lanjut%3F"
                                 target="_blank"
                                 rel="noopener noreferrer"
