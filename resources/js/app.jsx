@@ -3,8 +3,8 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { hydrateRoot } from 'react-dom/client';
 import '../css/app.css';
 import './bootstrap';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 const appName = import.meta.env.VITE_APP_NAME || 'QRPay';
 
