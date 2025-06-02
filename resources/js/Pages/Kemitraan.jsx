@@ -1,48 +1,79 @@
 import { useEffect, useState } from 'react';
-import Veloticket from './assets/Ticket.png';
+import Veloticket from './assets/Konten.png';
 
 const Kemitraan = () => {
     const [show, setShow] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => setShow(true), 100);
+        const timer = setTimeout(() => setShow(true), 100);
+        return () => clearTimeout(timer);
     }, []);
 
     return (
         <div
-            className="flex min-h-screen w-full items-center justify-center bg-gray-50"
-            style={{ background: 'linear-gradient(180deg, #8FD8FA 40%, #fff 100%)', fontFamily: 'DM Sans, sans-serif' }}
+            className="w-full min-h-screen flex items-center justify-center"
+            style={{
+                background: 'linear-gradient(180deg, #8FD8FA 40%, #fff 100%)',
+                fontFamily: 'DM Sans, sans-serif',
+            }}
         >
-            <div className="flex flex-col-reverse md:flex-row items-center justify-center w-full max-w-6xl gap-8 px-2 sm:px-4 py-8 md:py-0 mt-24 md:mt-40 lg:mt-20">
+            <div className="flex flex-col-reverse md:flex-row items-center justify-between max-w-7xl w-full px-6 lg:px-8 py-20 gap-15">
+                
+                {/* Left Content */}
                 <div
-                    className={`flex flex-1 flex-col items-center justify-center text-center transition-all duration-1000 md:items-start md:text-left ${show ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'}`}
-                    style={{ transitionProperty: 'opacity, transform' }}
-                >
-                    <h1 className="mb-4 text-2xl sm:text-4xl md:text-5xl font-bold text-gray-800" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                        Bergabung Menjadi Agen <span className="text-[#EF018F]">QRPay</span>
-                    </h1>
-                    <p className="mb-6 text-base sm:text-lg md:text-xl text-gray-700" style={{ fontFamily: 'DM Sans, sans-serif' }}>
-                        Raih peluang bisnis digital bersama QRPay! Daftarkan dirimu sebagai agen dan nikmati berbagai keuntungan, kemudahan transaksi,
-                        serta dukungan penuh dari tim kami. Jadilah bagian dari ekosistem pembayaran modern Indonesia.
-                    </p>
-                    <a
-                        href="/form-registrasi-agen"
-                        className="inline-block rounded-full bg-[#EF018F] px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg font-semibold text-white shadow-lg transition duration-200 hover:bg-pink-600"
-                        style={{ fontFamily: 'DM Sans, sans-serif' }}
-                    >
-                        Daftar Agen QRPay Sekarang
-                    </a>
-                </div>
+    className={`w-full md:w-1/2 transition-all duration-1000 ${
+        show ? 'translate-x-0 opacity-100' : '-translate-x-10 opacity-0'
+    }`}
+    style={{ transitionProperty: 'opacity, transform' }}
+>
+    <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-800 mb-6 leading-tight">
+        Jadi Agen <span className="text-[#EF018F]">QRPay</span> & Raup Cuan!
+    </h1>
+
+    <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">
+        Bisnis digital kini lebih mudah. Gabung sebagai agen, nikmati komisi fleksibel, fitur lengkap, dan support penuh dari tim kami.
+    </p>
+
+    <div className="mb-8">
+    <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4">Kenapa QRPay?</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-4 text-sm sm:text-base text-gray-700 leading-relaxed font-bold">
+        {[
+            'Reservasi 24 jam nonstop',
+            'Satu akun untuk semua layanan',
+            'Harga & kursi transparan',
+            'Booking & issued tiket mandiri',
+            'Sub-agen tanpa batas & komisi sendiri',
+            'Marketing kit & admin fleksibel',
+        ].map((item, index) => (
+            <div key={index} className="flex items-start gap-2">
+                <span className="text-[#EF018F] font-bold text-lg leading-none">•</span>
+                <span>{item}</span>
+            </div>
+        ))}
+    </div>
+</div>
+
+    <a
+        href="/form-registrasi-agen"
+        className="inline-block rounded-full bg-[#EF018F] px-8 py-3 text-base sm:text-lg font-semibold text-white shadow-md hover:bg-pink-600 transition-all duration-300"
+    >
+        Daftar Sekarang
+    </a>
+</div>
+
+
+                {/* Right Image */}
                 <div
-                    className={`flex flex-1 items-center justify-center transition-all duration-1000 ${show ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`}
+                    className={`w-full md:w-1/2 flex justify-center items-center transition-all duration-1000 ${
+                        show ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'
+                    }`}
                     style={{ transitionProperty: 'opacity, transform' }}
                 >
                     <img
-                        src={Veloticket}
-                        alt="VeloTicket"
-                        className="mx-auto max-h-[260px] sm:max-h-[340px] md:max-h-[420px] lg:max-h-[500px] w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] object-contain"
-                        style={{ display: 'block' }}
-                    />
+    src={Veloticket}
+    alt="QRPay Agent Illustration"
+    className="w-[100%] lg:w-[200%] max-w-[900px] lg:h-[500px] md:h-[500px] object-contain"
+/>
                 </div>
             </div>
         </div>

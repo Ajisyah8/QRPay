@@ -1,29 +1,33 @@
-import { createInertiaApp } from '@inertiajs/react';
-import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
-import { hydrateRoot } from 'react-dom/client';
+// @ts-nocheck
 import '../css/app.css';
 import './bootstrap';
-import Footer from './components/Footer';
-import Navbar from './components/Navbar';
+import React from 'react';
+import Layout from './Layout';
+
+import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createRoot } from 'react-dom/client';
 
 const appName = import.meta.env.VITE_APP_NAME || 'QRPay';
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
-    resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
-    setup({ el, App, props }) {
-        const PageComponent = <App {...props} />;
-
-        hydrateRoot(
-            el,
-            <div className="flex min-h-screen flex-col">
-                <Navbar />
-                <main className="flex-grow">{PageComponent}</main>
-                <Footer />
-            </div>,
-        );
-    },
-    progress: {
-        color: '#4B5563',
-    },
+  title: (title) => `${title} - ${appName}`,
+  resolve: (name) =>
+    resolvePageComponent(
+      `./Pages/${name}.jsx`,
+      import.meta.glob('./Pages/**/*.jsx')
+    ).then((module) => {
+      const Page = module && module.default ? module.default : module;
+      if (!Page.layout) {
+        Page.layout = (page) => <Layout>{page}</Layout>;
+      }
+      return Page;
+    }),
+  setup({ el, App, props }) {
+    const root = createRoot(el);
+    root.render(<App {...props} />);
+  },
+  progress: {
+    color: '#4B5563',
+  },
 });

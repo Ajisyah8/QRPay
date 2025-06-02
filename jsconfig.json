@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "jsx": "react-jsx", // ✅ ini lebih cocok untuk React 17+
+    "allowImportingTsExtensions": true,
+    "strictNullChecks": false, // ✅ dimatikan
+    "strictFunctionTypes": false // ✅ dimatikan
+  },
+  "exclude": [
+    "node_modules",
+    "**/node_modules/*"
+  ]
+}
