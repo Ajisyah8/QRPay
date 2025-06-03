@@ -134,7 +134,7 @@ const Footer = () => {
                         </div>
                         <div className="mt-16 sm:mt-24">
                             <a 
-                                href="" 
+                                href="https://drive.google.com/file/d/1DtFgZJdDapjSpvtgKDef8qNe1mjF-hHU/view?usp=sharing" 
                                 target="_blank" 
                                 rel="noopener noreferrer" 
                                 className="inline-block"

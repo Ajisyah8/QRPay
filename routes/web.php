@@ -14,3 +14,15 @@ Route::get('/form-registrasi-agen', function () {
 Route::get('/terms', function () {
     return Inertia::render('Terms');
 });
+
+Route::get('/privacy', function () {
+    return Inertia::render('Privacy');
+});
+
+Route::get('/legal', function () {
+    return Inertia::render('Legal');
+});
+
+Route::get('/accessibility', function () {
+    return Inertia::render('Accessibility');
+});
